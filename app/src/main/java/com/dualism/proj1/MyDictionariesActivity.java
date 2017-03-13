@@ -5,25 +5,17 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicNameValuePair;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
-import static android.R.attr.data;
+
 
 public class MyDictionariesActivity extends AppCompatActivity {
-
-    //String kekStr = "";
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,24 +24,27 @@ public class MyDictionariesActivity extends AppCompatActivity {
     }
 
     public void testButton(View view) {
-        //TextView textView = (TextView) findViewById(R.id.editText);
+        final TextView mTextView = (TextView) findViewById(R.id.editText2);
 
-        HttpClient httpclient = new DefaultHttpClient();
-        HttpPost httppost = new HttpPost("https://google.com:5228");
+        // Instantiate the RequestQueue.
+        RequestQueue queue = Volley.newRequestQueue(this);
+        String url ="http://25.80.63.196:8080/serverURL";
 
-        try {
-            //add data
-            List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(1);
-            nameValuePairs.add(new BasicNameValuePair("data", "kek"));
-            httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-            //execute http post
-            HttpResponse response = httpclient.execute(httppost);
-            System.out.println(response.toString());
-
-        } catch (ClientProtocolException e) {
-
-        } catch (IOException e) {
-
-        }
+        // Request a string response from the provided URL.
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        // Display the first 500 characters of the response string.
+                        mTextView.setText("Response is: "+ response.substring(0,500));
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                mTextView.setText("That didn't work!");
+            }
+        });
+        // Add the request to the RequestQueue.
+        queue.add(stringRequest);
     }
 }
