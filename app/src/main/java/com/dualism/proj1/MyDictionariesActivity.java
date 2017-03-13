@@ -5,6 +5,21 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import static android.R.attr.data;
+
 public class MyDictionariesActivity extends AppCompatActivity {
 
     //String kekStr = "";
@@ -17,17 +32,24 @@ public class MyDictionariesActivity extends AppCompatActivity {
     }
 
     public void testButton(View view) {
-        TextView textView = (TextView) findViewById(R.id.editText);
+        //TextView textView = (TextView) findViewById(R.id.editText);
 
-        /*if (textView.getText().toString().equals("Lol")){
-            kekStr = "Kek";
-            textView.setText(kekStr);
-        } else if (textView.getText().toString().equals("Kek")){
-            kekStr = "Chebureck";
-            textView.setText(kekStr);
-        } else {
-            kekStr = "Lol";
-            textView.setText(kekStr);
-        }*/
+        HttpClient httpclient = new DefaultHttpClient();
+        HttpPost httppost = new HttpPost("https://google.com:5228");
+
+        try {
+            //add data
+            List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(1);
+            nameValuePairs.add(new BasicNameValuePair("data", "kek"));
+            httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+            //execute http post
+            HttpResponse response = httpclient.execute(httppost);
+            System.out.println(response.toString());
+
+        } catch (ClientProtocolException e) {
+
+        } catch (IOException e) {
+
+        }
     }
 }
