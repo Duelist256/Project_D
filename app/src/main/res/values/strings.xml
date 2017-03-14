@@ -5,4 +5,6 @@
     <string name="gr_book_name">Grammar Book</string>
     <string name="gr_practice_name">Grammar Practice</string>
     <string name="word_transl_name">Word-Translation</string>
+    <string name="incorrect_toast">Incorrect!</string>
+    <string name="correct_toast">Correct!</string>
 </resources>

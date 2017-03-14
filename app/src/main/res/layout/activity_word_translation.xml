@@ -21,39 +21,43 @@
         android:id="@+id/answ1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:onClick="answ1Btn"
         android:text="Button"
+        app:layout_constraintBottom_toTopOf="@+id/answ2"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/word"
-        app:layout_constraintBottom_toTopOf="@+id/answ2" />
+        app:layout_constraintTop_toBottomOf="@+id/word" />
 
     <Button
         android:id="@+id/answ2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:onClick="answ2Btn"
         android:text="Button"
+        app:layout_constraintBottom_toTopOf="@+id/answ3"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/answ1"
-        app:layout_constraintBottom_toTopOf="@+id/answ3" />
+        app:layout_constraintTop_toBottomOf="@+id/answ1" />
 
     <Button
         android:id="@+id/answ3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:onClick="answ3Btn"
         android:text="Button"
+        app:layout_constraintBottom_toTopOf="@+id/answ4"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/answ2"
-        app:layout_constraintBottom_toTopOf="@+id/answ4" />
+        app:layout_constraintTop_toBottomOf="@+id/answ2" />
 
     <Button
         android:id="@+id/answ4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:onClick="answ4Btn"
         android:text="Button"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/answ3"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/answ3" />
 </android.support.constraint.ConstraintLayout>

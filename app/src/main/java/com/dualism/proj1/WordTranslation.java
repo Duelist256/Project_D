@@ -2,8 +2,10 @@ package com.dualism.proj1;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class WordTranslation extends AppCompatActivity {
 
@@ -33,5 +35,37 @@ public class WordTranslation extends AppCompatActivity {
         answ2.setText(transl1[2]);
         answ3.setText(transl1[3]);
         answ4.setText(transl1[4]);
+    }
+
+    public void answ1Btn(View view){
+        if(answ1.getText().toString().equals("кошка")){
+            Toast.makeText(WordTranslation.this, R.string.correct_toast, Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(WordTranslation.this, R.string.incorrect_toast, Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void answ2Btn(View view){
+        if(answ2.getText().toString().equals("кошка")){
+            Toast.makeText(WordTranslation.this, R.string.correct_toast, Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(WordTranslation.this, R.string.incorrect_toast, Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void answ3Btn(View view){
+        if(answ3.getText().toString().equals("кошка")){
+            Toast.makeText(WordTranslation.this, R.string.correct_toast, Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(WordTranslation.this, R.string.incorrect_toast, Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void answ4Btn(View view){
+        if(answ4.getText().toString().equals("кошка")){
+            Toast.makeText(WordTranslation.this, R.string.correct_toast, Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(WordTranslation.this, R.string.incorrect_toast, Toast.LENGTH_SHORT).show();
+        }
     }
 }
