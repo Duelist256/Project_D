@@ -28,7 +28,7 @@ public class MyDictionariesActivity extends AppCompatActivity {
 
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url ="http://25.80.63.196:8080/serverURL";
+        String url ="http://25.80.63.196:8080/URL";
 
         // Request a string response from the provided URL.
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
@@ -36,7 +36,7 @@ public class MyDictionariesActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
                         // Display the first 500 characters of the response string.
-                        mTextView.setText("Response is: "+ response.substring(0,500));
+                        mTextView.setText("Response is: "+ response.substring(0,1500));
                     }
                 }, new Response.ErrorListener() {
             @Override

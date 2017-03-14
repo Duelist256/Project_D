@@ -18,4 +18,9 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, MyDictionariesActivity.class);
         startActivity(intent);
     }
+
+    public void learnWords(View view) {
+        Intent intent = new Intent(this, LearnWordsActivity.class);
+        startActivity(intent);
+    }
 }
