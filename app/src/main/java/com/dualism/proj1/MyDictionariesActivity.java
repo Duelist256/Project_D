@@ -28,8 +28,8 @@ public class MyDictionariesActivity extends AppCompatActivity {
 
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(this);
+        //String url ="http://25.80.63.196:8080/URL";
         String url ="http://25.80.63.196:8080/URL";
-
         // Request a string response from the provided URL.
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {

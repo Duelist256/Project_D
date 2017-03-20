@@ -6,17 +6,15 @@ import android.os.Bundle;
 import android.view.View;
 
 public class LearnWordsActivity extends AppCompatActivity {
-    DatabaseHelper myDb; //
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_learn_words);
-        myDb = new DatabaseHelper(this);//
     }
 
     public void wordTransl(View view) {
-        Intent intent = new Intent(this, WordTranslation.class);
+        Intent intent = new Intent(this, WordTranslationActivity.class);
         startActivity(intent);
     }
 }
