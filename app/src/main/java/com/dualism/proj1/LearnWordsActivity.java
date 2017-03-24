@@ -17,4 +17,9 @@ public class LearnWordsActivity extends AppCompatActivity {
         Intent intent = new Intent(this, WordTranslationActivity.class);
         startActivity(intent);
     }
+
+    public void translWord(View view) {
+        Intent intent = new Intent(this, TranslationWordActivity.class);
+        startActivity(intent);
+    }
 }

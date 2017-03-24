@@ -9,17 +9,16 @@ import android.widget.Toast;
 
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.Random;
-import java.util.concurrent.ThreadLocalRandom;
 
-public class WordTranslationActivity extends AppCompatActivity {
+public class TranslationWordActivity extends AppCompatActivity {
 
-    private TextView tvWord;
+    private TextView tvTranslation;
+    private TextView truwnost;
 
-    private Button transl1;
-    private Button transl2;
-    private Button transl3;
-    private Button transl4;
+    private Button btnWord1;
+    private Button btnWord2;
+    private Button btnWord3;
+    private Button btnWord4;
     private Button nextBtn;
 
     private WordTransl[] TranslTest = new WordTransl[] {
@@ -32,28 +31,28 @@ public class WordTranslationActivity extends AppCompatActivity {
     private int CurrentIndex;
 
     private void updateQuestion() {
-        String question = TranslTest[CurrentIndex].getWord();
-        tvWord.setText(question);
+        String question = TranslTest[CurrentIndex].getTranslation();
+        tvTranslation.setText(question);
 
-        String[] translations = new String[4];
-        for (int i = 0; i < translations.length; i++) {
-            translations[i] = TranslTest[i].getTranslation();
+        String[] words = new String[4];
+        for (int i = 0; i < words.length; i++) {
+            words[i] = TranslTest[i].getWord();
         }
 
-        Collections.shuffle(Arrays.asList(translations));
+        Collections.shuffle(Arrays.asList(words));
 
-        transl1.setText(translations[0]);
-        transl2.setText(translations[1]);
-        transl3.setText(translations[2]);
-        transl4.setText(translations[3]);
+        btnWord1.setText(words[0]);
+        btnWord2.setText(words[1]);
+        btnWord3.setText(words[2]);
+        btnWord4.setText(words[3]);
     }
 
     private void checkAnswer(String answer){
         int messageResId = 0;
 
         for (int i = 0; i < TranslTest.length; i++) {
-            if(tvWord.getText().toString().equals(TranslTest[i].getWord())) {
-                if (answer.equals(TranslTest[i].getTranslation())) {
+            if(tvTranslation.getText().toString().equals(TranslTest[i].getTranslation())) {
+                if (answer.equals(TranslTest[i].getWord())) {
                     messageResId = R.string.correct_toast;
                     break;
                 }
@@ -63,48 +62,47 @@ public class WordTranslationActivity extends AppCompatActivity {
         Toast.makeText(this, messageResId, Toast.LENGTH_SHORT).show();
     }
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_word_translation);
+        setContentView(R.layout.activity_translation_word);
 
-        tvWord = (TextView) findViewById(R.id.word);
+        tvTranslation = (TextView) findViewById(R.id.tvTranslation);
 
 
-        transl1 = (Button) findViewById(R.id.trans1);
-        transl1.setOnClickListener(new View.OnClickListener() {
+        btnWord1 = (Button) findViewById(R.id.btnWord1);
+        btnWord1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                checkAnswer(transl1.getText().toString());
+                checkAnswer(btnWord1.getText().toString());
             }
         });
 
-        transl2 = (Button) findViewById(R.id.trans2);
-        transl2.setOnClickListener(new View.OnClickListener() {
+        btnWord2 = (Button) findViewById(R.id.btnWord2);
+        btnWord2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                checkAnswer(transl2.getText().toString());
+                checkAnswer(btnWord2.getText().toString());
             }
         });
 
-        transl3 = (Button) findViewById(R.id.trans3);
-        transl3.setOnClickListener(new View.OnClickListener() {
+        btnWord3 = (Button) findViewById(R.id.btnWord3);
+        btnWord3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                checkAnswer(transl3.getText().toString());
+                checkAnswer(btnWord3.getText().toString());
             }
         });
 
-        transl4 = (Button) findViewById(R.id.trans4);
-        transl4.setOnClickListener(new View.OnClickListener() {
+        btnWord4 = (Button) findViewById(R.id.btnWord4);
+        btnWord4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                checkAnswer(transl4.getText().toString());
+                checkAnswer(btnWord4.getText().toString());
             }
         });
 
-        nextBtn = (Button) findViewById(R.id.nextBtn);
+        nextBtn = (Button) findViewById(R.id.btnNext2);
         nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

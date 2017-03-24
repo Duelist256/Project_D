@@ -33,9 +33,10 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.bLogin:
-                if(etUsername.getText().toString().equals("admin") && etPassword.getText().toString().equals("admin")) {
+                /*if(etUsername.getText().toString().equals("admin") && etPassword.getText().toString().equals("admin")) {
                     startActivity(new Intent(this, MainActivity.class));
-                }
+                }*/
+                startActivity(new Intent(this, MainActivity.class));
                 break;
             case R.id.tvRegisterLink:
                 startActivity(new Intent(this, Register.class));

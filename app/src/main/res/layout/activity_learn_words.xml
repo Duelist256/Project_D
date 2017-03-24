@@ -7,7 +7,7 @@
     tools:context="com.dualism.proj1.LearnWordsActivity">
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btnWT"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="wordTransl"
@@ -17,5 +17,19 @@
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="78dp" />
+
+    <Button
+        android:id="@+id/btnTW"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:onClick="translWord"
+        android:text="@string/transl_word_name"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnWT"
+        app:layout_constraintVertical_bias="0.066"/>
 
 </android.support.constraint.ConstraintLayout>

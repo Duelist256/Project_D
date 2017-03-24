@@ -26,6 +26,8 @@
         <activity android:name=".WordTranslationActivity"/>
         <activity android:name=".Register">
         </activity>
+        <activity android:name=".TranslationWordActivity">
+        </activity>
     </application>
 
 </manifest>

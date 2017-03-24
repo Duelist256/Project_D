@@ -10,46 +10,46 @@
     tools:layout_editor_absoluteX="0dp">
 
     <Button
-        android:id="@+id/trans1"
+        android:id="@+id/btnWord1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/trans2"
+        app:layout_constraintBottom_toTopOf="@+id/btnWord2"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/word"/>
+        app:layout_constraintTop_toBottomOf="@+id/tvTranslation"/>
 
     <Button
-        android:id="@+id/trans2"
+        android:id="@+id/btnWord2"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
-        app:layout_constraintBottom_toTopOf="@+id/trans3"
+        app:layout_constraintBottom_toTopOf="@+id/btnWord3"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/trans1"/>
+        app:layout_constraintTop_toBottomOf="@+id/btnWord1"/>
 
     <Button
-        android:id="@+id/trans3"
+        android:id="@+id/btnWord3"
         android:layout_width="91dp"
         android:layout_height="48dp"
-        app:layout_constraintBottom_toTopOf="@+id/trans4"
+        app:layout_constraintBottom_toTopOf="@+id/btnWord4"
         app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/trans2"/>
+        app:layout_constraintTop_toBottomOf="@+id/btnWord2"/>
 
     <Button
-        android:id="@+id/trans4"
+        android:id="@+id/btnWord4"
         android:layout_width="89dp"
         android:layout_height="48dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/trans3"
+        app:layout_constraintTop_toBottomOf="@+id/btnWord3"
         />
 
     <Button
-        android:id="@+id/nextBtn"
+        android:id="@+id/btnNext2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
@@ -66,13 +66,13 @@
         app:layout_constraintVertical_bias="0.982"/>
 
     <TextView
-        android:id="@+id/word"
+        android:id="@+id/tvTranslation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/trans1"/>
+        app:layout_constraintBottom_toTopOf="@+id/btnWord1"/>
 
 </android.support.constraint.ConstraintLayout>
