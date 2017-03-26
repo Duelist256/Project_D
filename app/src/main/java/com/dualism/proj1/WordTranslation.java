@@ -4,11 +4,11 @@ package com.dualism.proj1;
  * Created by Duelist on 21.03.2017.
  */
 
-public class WordTransl {
+public class WordTranslation {
     private String word;
     private String translation;
 
-    public WordTransl(String word, String translation) {
+    public WordTranslation(String word, String translation) {
         this.word = word;
         this.translation = translation;
     }

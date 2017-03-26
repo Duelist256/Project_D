@@ -8,16 +8,35 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.dualism.proj1.DB.DatabaseHandler;
+
+import java.util.List;
+
+import com.dualism.proj1.DB.WordTransl;
+
 public class MainActivity extends AppCompatActivity {
 
-    private MyDB myDB;
-    private String id;
-    private Integer idInt = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        myDB = new MyDB(this);
+
+        DatabaseHandler db = new DatabaseHandler(this);
+
+        System.out.println("Inserting ..");
+        db.addWordTransl(new WordTransl("key", "ключ"));
+        db.addWordTransl(new WordTransl("whale", "кит"));
+        db.addWordTransl(new WordTransl(44, "peseg", "собака")); // but it outputs id = 3
+
+        System.out.println("Reading all contacts..");
+        List<WordTransl> wordTranls = db.getAllWordTransls();
+        for (WordTransl wr : wordTranls) {
+            String log = "Id: " + wr.getID() + " ,Word: " + wr.getWord() + " ,Translation: " + wr.getTranslation_value();
+            System.out.print("Name: ");
+            System.out.println(log);
+        }
+
+        db.deleteAll();
     }
 
     public void myDictionaries(View view) {
@@ -29,11 +48,5 @@ public class MainActivity extends AppCompatActivity {
     public void learnWords(View view) {
         Intent intent = new Intent(this, LearnWordsActivity.class);
         startActivity(intent);
-    }
-
-    public void grammBook(View view) {
-        id = idInt.toString();
-        myDB.createRecords(id, "Kek");
-        idInt++;
     }
 }

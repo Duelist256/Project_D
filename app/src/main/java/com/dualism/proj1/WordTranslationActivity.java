@@ -9,8 +9,6 @@ import android.widget.Toast;
 
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.Random;
-import java.util.concurrent.ThreadLocalRandom;
 
 public class WordTranslationActivity extends AppCompatActivity {
 
@@ -22,11 +20,11 @@ public class WordTranslationActivity extends AppCompatActivity {
     private Button transl4;
     private Button nextBtn;
 
-    private WordTransl[] TranslTest = new WordTransl[] {
-            new WordTransl("dog", "собака"),
-            new WordTransl("cat", "кошка"),
-            new WordTransl("frog", "лягушка"),
-            new WordTransl("bird", "птица"),
+    private WordTranslation[] TranslTest = new WordTranslation[] {
+            new WordTranslation("dog", "собака"),
+            new WordTranslation("cat", "кошка"),
+            new WordTranslation("frog", "лягушка"),
+            new WordTranslation("bird", "птица"),
     };
 
     private int CurrentIndex;

@@ -19,13 +19,12 @@ public class TranslationWordActivity extends AppCompatActivity {
     private Button btnWord2;
     private Button btnWord3;
     private Button btnWord4;
-    private Button nextBtn;
 
-    private WordTransl[] TranslTest = new WordTransl[] {
-            new WordTransl("dog", "собака"),
-            new WordTransl("cat", "кошка"),
-            new WordTransl("frog", "лягушка"),
-            new WordTransl("bird", "птица"),
+    private WordTranslation[] TranslTest = new WordTranslation[] {
+            new WordTranslation("dog", "собака"),
+            new WordTranslation("cat", "кошка"),
+            new WordTranslation("frog", "лягушка"),
+            new WordTranslation("bird", "птица"),
     };
 
     private int CurrentIndex;
@@ -102,7 +101,8 @@ public class TranslationWordActivity extends AppCompatActivity {
             }
         });
 
-        nextBtn = (Button) findViewById(R.id.btnNext2);
+        // "Next" button is here
+        Button nextBtn = (Button) findViewById(R.id.btnNext2);
         nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
