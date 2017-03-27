@@ -1,5 +1,6 @@
 package com.dualism.proj1;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -25,6 +26,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
@@ -34,7 +36,10 @@ import java.util.Map;
 public class Register_Activity extends AppCompatActivity {
     Button bRegister;
     EditText etName, etAge, etEmail, etPassword;
+    JSONObject okResponse;
+    String lelResponse;
 
+    private boolean isResponsesEqual = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +50,13 @@ public class Register_Activity extends AppCompatActivity {
         etEmail = (EditText) findViewById(R.id.etEmail);
         etPassword= (EditText) findViewById(R.id.etPassword);
 
+        try {
+            okResponse = new JSONObject("{\"value\":\"Ok\"}");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        lelResponse = "{\"value\":\"Ok\"}";
         /*bRegister = (Button) findViewById(R.id.bRegister);
         bRegister.setOnClickListener(this);*/
     }
@@ -70,9 +82,10 @@ public class Register_Activity extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONObject response) {
                         Log.d(TAG, response.toString());
+                        okResponse = response;
+                        //okResponse = response.toString();
                         //msgResponse.setText(response.toString());
                         //hideProgressDialog();
-
                     }
                 },
                 new Response.ErrorListener() {
@@ -113,6 +126,19 @@ public class Register_Activity extends AppCompatActivity {
         //AppController.getInstance().addToRequestQueue(jsonObjReq,tag_json_obj);
         queue.add(jsonObjReq);
 
+        try {
+            String okValue = okResponse.getString("value");
+            if (okValue.equals("Ok")) {
+                isResponsesEqual = true;
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        if (isResponsesEqual) {
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+        }
         /*//mPostCommentResponse.requestStarted();
         RequestQueue queue = Volley.newRequestQueue(this);
         StringRequest sr = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
