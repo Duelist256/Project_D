@@ -15,18 +15,20 @@ import java.util.List;
 import com.dualism.proj1.DB.WordTransl;
 
 public class MainActivity extends AppCompatActivity {
+    DatabaseHandler db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        DatabaseHandler db = new DatabaseHandler(this);
+        db = new DatabaseHandler(this);
 
         System.out.println("Inserting ..");
         db.addWordTransl(new WordTransl("key", "ключ"));
         db.addWordTransl(new WordTransl("whale", "кит"));
-        db.addWordTransl(new WordTransl(44, "peseg", "собака")); // but it outputs id = 3
+        db.addWordTransl(new WordTransl(44, "dog", "собака")); // but it outputs id = 3
+        db.addWordTransl(new WordTransl("coat", "пальто"));
 
         System.out.println("Reading all contacts..");
         List<WordTransl> wordTranls = db.getAllWordTransls();
@@ -36,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
             System.out.println(log);
         }
 
-        db.deleteAll();
+        //db.deleteAll();
     }
 
     public void myDictionaries(View view) {
@@ -47,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
     //
     public void learnWords(View view) {
         Intent intent = new Intent(this, LearnWordsActivity.class);
+        //intent.putExtra();
         startActivity(intent);
     }
 }

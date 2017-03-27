@@ -15,8 +15,8 @@ import java.util.List;
 
 public class DatabaseHandler extends SQLiteOpenHelper implements IDatabaseHandler {
     private static final int DATABASE_VERSION = 1;
-    private static final String DATABASE_NAME = "contactsManager";
-    private static final String TABLE_CONTACTS = "contacts";
+    private static final String DATABASE_NAME = "dictionaries.db";
+    private static final String TABLE_CONTACTS = "dictionary1";
     private static final String KEY_ID = "id";
     private static final String KEY_NAME = "name";
     private static final String KEY_PH_NO = "phone_number";
@@ -123,5 +123,35 @@ public class DatabaseHandler extends SQLiteOpenHelper implements IDatabaseHandle
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_CONTACTS, null, null);
         db.close();
+    }
+
+    // ...
+    public String[] getAppCategoryDetail() {
+
+        //final String TABLE_NAME = "name of table";
+
+        String selectQuery = "SELECT  * FROM " + TABLE_CONTACTS;
+        SQLiteDatabase db  = this.getReadableDatabase();
+        Cursor cursor      = db.rawQuery(selectQuery, null);
+        String[] data      = null;
+
+        String string = "";
+        if (cursor.moveToFirst()) {
+            do {
+                // get the data into array, or class variable
+                //System.out.println("Reading all contacts..");
+
+                List<WordTransl> wordTranls = getAllWordTransls();
+                for (WordTransl wr : wordTranls) {
+                    String log = "Id: " + wr.getID() + " ,Word: " + wr.getWord() + " ,Translation: " + wr.getTranslation_value();
+                    System.out.print("Name: ");
+                    System.out.println(log);
+                    string += log + "\n";
+                }
+            } while (cursor.moveToNext());
+        }
+        data[0] = string;
+        cursor.close();
+        return data;
     }
 }

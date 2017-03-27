@@ -8,7 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-public class Login extends AppCompatActivity implements View.OnClickListener {
+public class Login_Activity extends AppCompatActivity implements View.OnClickListener {
 
     Button bLogin;
     EditText etUsername, etPassword;
@@ -39,7 +39,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                 startActivity(new Intent(this, MainActivity.class));
                 break;
             case R.id.tvRegisterLink:
-                startActivity(new Intent(this, Register.class));
+                startActivity(new Intent(this, Register_Activity.class));
                 break;
         }
     }
