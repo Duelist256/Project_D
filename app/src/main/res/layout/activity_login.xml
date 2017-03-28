@@ -13,7 +13,7 @@
         android:text="Username"/>
 
     <EditText
-        android:id="@+id/etUsername"
+        android:id="@+id/etEmail"
         android:layout_width="match_parent"
         android:layout_marginBottom="10dp"
         android:layout_height="wrap_content"/>
@@ -32,16 +32,18 @@
 
     <Button
         android:id="@+id/bLogin"
-        android:text="Login"
-        android:layout_marginBottom="10dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:onClick="login"
+        android:text="Login"/>
 
     <TextView
         android:id="@+id/tvRegisterLink"
         android:layout_width="wrap_content"
-        android:text="Register here"
-        android:textStyle="bold"
+        android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_height="wrap_content"/>
+        android:onClick="tvRegister"
+        android:text="Register here"
+        android:textStyle="bold"/>
 </LinearLayout>

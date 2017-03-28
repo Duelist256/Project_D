@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.dualism.proj1.DB.DatabaseHandler;
 
@@ -16,6 +17,7 @@ import com.dualism.proj1.DB.WordTransl;
 
 public class MainActivity extends AppCompatActivity {
     DatabaseHandler db;
+    TextView tvUsername;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
         db.addWordTransl(new WordTransl(44, "dog", "собака")); // but it outputs id = 3
         db.addWordTransl(new WordTransl("coat", "пальто"));
 
+        tvUsername = (TextView) findViewById(R.id.tvUsername);
         System.out.println("Reading all contacts..");
         List<WordTransl> wordTranls = db.getAllWordTransls();
         for (WordTransl wr : wordTranls) {
@@ -38,6 +41,9 @@ public class MainActivity extends AppCompatActivity {
             System.out.println(log);
         }
 
+        Intent intent = getIntent();
+        String usrname = intent.getStringExtra("Ok");
+        tvUsername.setText("Hello, "+ usrname + "!");
         //db.deleteAll();
     }
 

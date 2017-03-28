@@ -34,10 +34,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Register_Activity extends AppCompatActivity {
-    Button bRegister;
-    EditText etName, etAge, etEmail, etPassword;
+    //Button bRegister;
+    EditText etName, etEmail, etPassword;
     JSONObject okResponse;
-    String lelResponse;
+    String okResp;
 
     private boolean isResponsesEqual = false;
     @Override
@@ -46,17 +46,17 @@ public class Register_Activity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
 
         etName = (EditText) findViewById(R.id.etName);
-        etAge = (EditText) findViewById(R.id.etAge);
+        //etAge = (EditText) findViewById(R.id.etAge);
         etEmail = (EditText) findViewById(R.id.etEmail);
         etPassword= (EditText) findViewById(R.id.etPassword);
 
-        try {
+        /*try {
             okResponse = new JSONObject("{\"value\":\"Ok\"}");
         } catch (JSONException e) {
             e.printStackTrace();
-        }
+        }*/
 
-        lelResponse = "{\"value\":\"Ok\"}";
+        //lelResponse = "{\"value\":\"Ok\"}";
         /*bRegister = (Button) findViewById(R.id.bRegister);
         bRegister.setOnClickListener(this);*/
     }
@@ -127,18 +127,18 @@ public class Register_Activity extends AppCompatActivity {
         queue.add(jsonObjReq);
 
         try {
-            String okValue = okResponse.getString("value");
-            if (okValue.equals("Ok")) {
-                isResponsesEqual = true;
+            okResp = okResponse.getString("value");
+            if (okResp.equals("Ok")) {
+                Intent intent = new Intent(this, MainActivity.class);
+                intent.putExtra("Ok", etName.getText().toString());
+                startActivity(intent);
             }
         } catch (JSONException e) {
             e.printStackTrace();
+        } catch (NullPointerException err) {
+            err.printStackTrace();
         }
 
-        if (isResponsesEqual) {
-            Intent intent = new Intent(this, MainActivity.class);
-            startActivity(intent);
-        }
         /*//mPostCommentResponse.requestStarted();
         RequestQueue queue = Volley.newRequestQueue(this);
         StringRequest sr = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {

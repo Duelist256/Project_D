@@ -23,7 +23,7 @@ public class TranslationWordActivity extends AppCompatActivity {
     private WordTranslation[] TranslTest = new WordTranslation[] {
             new WordTranslation("dog", "собака"),
             new WordTranslation("cat", "кошка"),
-            new WordTranslation("frog", "лягушка"),
+            new WordTranslation("fox", "лиса"),
             new WordTranslation("bird", "птица"),
     };
 
