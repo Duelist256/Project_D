@@ -67,7 +67,7 @@ public class Register_Activity extends AppCompatActivity {
         final String TAG = "Lol";
         RequestQueue queue = Volley.newRequestQueue(this);
 
-        String url = "http://10.0.2.2:8080/saveuser";
+        String url = "http://25.80.63.196:8080/saveuser";
 
         final Map<String, String> postParam= new HashMap<String, String>();
         //postParam.put("id", "228");

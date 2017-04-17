@@ -62,7 +62,7 @@ public class Login_Activity extends AppCompatActivity {
     public void login(View view) {
         final String TAG = "Lol";
 
-        String url = "http://10.0.2.2:8080/checkuser";
+        String url = "http://25.80.63.196:8080/checkuser";
 
         final Map<String, String> postParam= new HashMap<String, String>();
         //postParam.put("id", "228");
