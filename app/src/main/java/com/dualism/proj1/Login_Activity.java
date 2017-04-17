@@ -35,6 +35,7 @@ public class Login_Activity extends AppCompatActivity {
     TextView tvRegisterLink;
 
     JSONObject okayResponse;
+    RequestQueue queue;
 
     private String okValue;
 
@@ -49,6 +50,7 @@ public class Login_Activity extends AppCompatActivity {
 
         etEmail= (EditText) findViewById(R.id.etEmail);
         etPassword = (EditText) findViewById(R.id.etPassword);
+        queue = Volley.newRequestQueue(this);
 
         /*bLogin = (Button) findViewById(R.id.bLogin);
         bLogin.setOnClickListener(this);
@@ -59,11 +61,8 @@ public class Login_Activity extends AppCompatActivity {
 
     public void login(View view) {
         final String TAG = "Lol";
-        RequestQueue queue = Volley.newRequestQueue(this);
 
-        String url = "http://25.80.63.196:8080/checkuser";
-
-
+        String url = "http://10.0.2.2:8080/checkuser";
 
         final Map<String, String> postParam= new HashMap<String, String>();
         //postParam.put("id", "228");
@@ -72,47 +71,44 @@ public class Login_Activity extends AppCompatActivity {
         postParam.put("password", etPassword.getText().toString());
 
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST,
-                url, new JSONObject(postParam),
-                new Response.Listener<JSONObject>() {
-
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        Log.d(TAG, response.toString());
-                        okayResponse = response;
-                        if(!response.isNull("value")) {
-                            Log.d("axaxa", "kek");
-                        }
-                        try {
-
-                            setOkValue(response.getString("value"));
-                            Log.d("sa", okValue);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                        //okResponse = response.toString();
-                        //msgResponse.setText(response.toString());
-                        //hideProgressDialog();
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        //VolleyLog.d(TAG, "Error: " + error.getMessage());
-                        //hideProgressDialog();
-                        // System.out.println("Ty che mm?");
-                        if (error instanceof TimeoutError || error instanceof NoConnectionError) {
-                            Log.d("TE", "TimeoutError");
-                        } else if (error instanceof AuthFailureError) {
-                            Log.d("AFE", "AuthFailureError");
-                        } else if (error instanceof ServerError) {
-                            Log.d("SE", "ServerError");
-                        } else if (error instanceof NetworkError) {
-                            Log.d("NE", "NetworkError");
-                        } else if (error instanceof ParseError) {
-                            Log.d("PE", "ParseError");
-                        }
-                    }
-                }) {
+                url, new JSONObject(postParam), new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                Log.d(TAG, response.toString());
+                okayResponse = response;
+                if (!response.isNull("value")) {
+                    Log.d("axaxa", "kek");
+                }
+                try {
+                    setOkValue(response.getString("value"));
+                    Log.d("sa", okValue);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                //okResponse = response.toString();
+                //msgResponse.setText(response.toString());
+                //hideProgressDialog();
+                checkOkValue();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                //VolleyLog.d(TAG, "Error: " + error.getMessage());
+                //hideProgressDialog();
+                // System.out.println("Ty che mm?");
+                if (error instanceof TimeoutError || error instanceof NoConnectionError) {
+                    Log.d("TE", "TimeoutError");
+                } else if (error instanceof AuthFailureError) {
+                    Log.d("AFE", "AuthFailureError");
+                } else if (error instanceof ServerError) {
+                    Log.d("SE", "ServerError");
+                } else if (error instanceof NetworkError) {
+                    Log.d("NE", "NetworkError");
+                } else if (error instanceof ParseError) {
+                    Log.d("PE", "ParseError");
+                }
+            }
+        }) {
 
             /*
              Passing some request headers
@@ -129,14 +125,11 @@ public class Login_Activity extends AppCompatActivity {
 
         // Adding request to request queue
         //AppController.getInstance().addToRequestQueue(jsonObjReq,tag_json_obj);
+
         queue.add(jsonObjReq);
 
-        if(okValue != null) {
-            Log.d("sa2", okValue);
-            Intent intent = new Intent(this, MainActivity.class);
-            intent.putExtra("Ok", okValue.substring(4, okValue.length()));
-            startActivity(intent);
-        }
+
+
         //Log.d("mem", okValue);
         /*if (okValue.substring(0, 2).equals("Ok")) {
             Intent intent = new Intent(this, MainActivity.class);
@@ -149,6 +142,15 @@ public class Login_Activity extends AppCompatActivity {
         }*/
 
         //startActivity(new Intent(this, MainActivity.class));
+    }
+
+    public void checkOkValue() {
+        if(okValue != null) {
+            Log.d("sa2", okValue);
+            Intent intent = new Intent(this, MainActivity.class);
+            intent.putExtra("Ok", okValue.substring(4, okValue.length()));
+            startActivity(intent);
+        }
     }
 
     public void tvRegister(View view) {
