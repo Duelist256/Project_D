@@ -127,8 +127,7 @@ public class Login_Activity extends AppCompatActivity {
         //AppController.getInstance().addToRequestQueue(jsonObjReq,tag_json_obj);
 
         queue.add(jsonObjReq);
-
-
+        
 
         //Log.d("mem", okValue);
         /*if (okValue.substring(0, 2).equals("Ok")) {
