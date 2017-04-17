@@ -83,6 +83,11 @@ public class Register_Activity extends AppCompatActivity {
                     public void onResponse(JSONObject response) {
                         Log.d(TAG, response.toString());
                         okResponse = response;
+                        try {
+                            okResp = response.getString("value");
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                         //okResponse = response.toString();
                         //msgResponse.setText(response.toString());
                         //hideProgressDialog();
