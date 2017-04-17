@@ -67,7 +67,7 @@ public class Register_Activity extends AppCompatActivity {
         final String TAG = "Lol";
         RequestQueue queue = Volley.newRequestQueue(this);
 
-        String url = "http://25.80.63.196:8080/saveuser";
+        String url = "http://10.0.2.2:8080/saveuser";
 
         final Map<String, String> postParam= new HashMap<String, String>();
         //postParam.put("id", "228");
@@ -86,6 +86,7 @@ public class Register_Activity extends AppCompatActivity {
                         //okResponse = response.toString();
                         //msgResponse.setText(response.toString());
                         //hideProgressDialog();
+                        checkOkResp();
                     }
                 },
                 new Response.ErrorListener() {
@@ -125,19 +126,6 @@ public class Register_Activity extends AppCompatActivity {
         // Adding request to request queue
         //AppController.getInstance().addToRequestQueue(jsonObjReq,tag_json_obj);
         queue.add(jsonObjReq);
-
-        try {
-            okResp = okResponse.getString("value");
-            if (okResp.equals("Ok")) {
-                Intent intent = new Intent(this, MainActivity.class);
-                intent.putExtra("Ok", etName.getText().toString());
-                startActivity(intent);
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        } catch (NullPointerException err) {
-            err.printStackTrace();
-        }
 
         /*//mPostCommentResponse.requestStarted();
         RequestQueue queue = Volley.newRequestQueue(this);
@@ -180,5 +168,13 @@ public class Register_Activity extends AppCompatActivity {
         };
 
         queue.add(sr);*/
+    }
+
+    public void checkOkResp() {
+        if (okResp.equals("Ok")) {
+            Intent intent = new Intent(this, MainActivity.class);
+            intent.putExtra("Ok", etName.getText().toString());
+            startActivity(intent);
+        }
     }
 }
