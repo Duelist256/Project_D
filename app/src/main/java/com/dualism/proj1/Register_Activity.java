@@ -132,47 +132,6 @@ public class Register_Activity extends AppCompatActivity {
         //AppController.getInstance().addToRequestQueue(jsonObjReq,tag_json_obj);
         queue.add(jsonObjReq);
 
-        /*//mPostCommentResponse.requestStarted();
-        RequestQueue queue = Volley.newRequestQueue(this);
-        StringRequest sr = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                //mPostCommentResponse.requestCompleted();
-                Log.d("norm", response);
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                //mPostCommentResponse.requestEndedWithError(error);
-                error.printStackTrace();
-            }
-        }){
-            @Override
-            protected Map<String,String> getParams(){
-                *//*Map<String,String> params = new HashMap<String, String>();
-                params.put("user",userAccount.getUsername());
-                params.put("pass",userAccount.getPassword());
-                params.put("comment", Uri.encode(comment));
-                params.put("comment_post_ID",String.valueOf(postId));
-                params.put("blogId",String.valueOf(blogId));*//*
-                Map<String, String> params = postParam; // bred
-                return params;
-            }
-
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                HashMap<String, String> headers = new HashMap<String, String>();
-                //headers.put("Content-Type", "application/json; charset=utf-8");
-                return headers;
-            }
-
-            @Override
-            public String getBodyContentType() {
-                return "application/json";
-            }
-        };
-
-        queue.add(sr);*/
     }
 
     public void checkOkResp() {

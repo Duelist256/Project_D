@@ -59,7 +59,14 @@ public class Login_Activity extends AppCompatActivity {
         tvRegisterLink.setOnClickListener(this);*/
     }
 
+    public void getAudio() {
+        startActivity(new Intent(this, GetAudio.class));
+    }
+
     public void login(View view) {
+        //temporary line
+        getAudio();
+        //
         final String TAG = "Lol";
 
         String url = "http://10.0.2.2:8080/checkuser";
@@ -127,7 +134,7 @@ public class Login_Activity extends AppCompatActivity {
         //AppController.getInstance().addToRequestQueue(jsonObjReq,tag_json_obj);
 
         queue.add(jsonObjReq);
-        
+
 
         //Log.d("mem", okValue);
         /*if (okValue.substring(0, 2).equals("Ok")) {
