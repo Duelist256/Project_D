@@ -22,6 +22,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.apache.commons.codec.binary.Base64;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -59,17 +60,17 @@ public class Login_Activity extends AppCompatActivity {
         tvRegisterLink.setOnClickListener(this);*/
     }
 
-    public void getAudio() {
-        startActivity(new Intent(this, GetAudio.class));
-    }
+//    public void getAudio() {
+//        startActivity(new Intent(this, GetAudio.class));
+//    }
 
     public void login(View view) {
         //temporary line
-        getAudio();
+        //getAudio();
         //
         final String TAG = "Lol";
 
-        String url = "http://10.0.2.2:8080/checkuser";
+        String url = "http://54.218.48.30:8080/checkuser";
 
         final Map<String, String> postParam= new HashMap<String, String>();
         //postParam.put("id", "228");
@@ -124,6 +125,10 @@ public class Login_Activity extends AppCompatActivity {
             public Map<String, String> getHeaders() throws AuthFailureError {
                 HashMap<String, String> headers = new HashMap<String, String>();
                 headers.put("Content-Type", "application/json; charset=utf-8");
+                //put credentials here
+                String plainCredentials=etEmail.getText().toString()+":"+etPassword.getText().toString();
+                String base64Credentials = new String(Base64.encodeBase64(plainCredentials.getBytes()));
+                headers.put("Authorization", "Basic " + base64Credentials);
                 return headers;
             }
 
