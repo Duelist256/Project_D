@@ -23,6 +23,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.apache.commons.codec.binary.Base64;
+import org.apache.http.Header;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -32,8 +33,9 @@ import java.util.Map;
 public class Login_Activity extends AppCompatActivity {
 
     Button bLogin;
-    EditText etEmail, etPassword;
+    EditText etUsername, etPassword;
     TextView tvRegisterLink;
+    String credentials;
 
     JSONObject okayResponse;
     RequestQueue queue;
@@ -49,7 +51,7 @@ public class Login_Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        etEmail= (EditText) findViewById(R.id.etEmail);
+        etUsername= (EditText) findViewById(R.id.etEmail);
         etPassword = (EditText) findViewById(R.id.etPassword);
         queue = Volley.newRequestQueue(this);
 
@@ -60,9 +62,12 @@ public class Login_Activity extends AppCompatActivity {
         tvRegisterLink.setOnClickListener(this);*/
     }
 
-//    public void getAudio() {
-//        startActivity(new Intent(this, GetAudio.class));
-//    }
+    public void getAudio() {
+        Intent intent = new Intent(this, GetAudio.class);
+        intent.putExtra("credentials", credentials);
+        startActivity(intent);
+        //startActivity(new Intent(this, GetAudio.class));
+    }
 
     public void login(View view) {
         //temporary line
@@ -70,11 +75,11 @@ public class Login_Activity extends AppCompatActivity {
         //
         final String TAG = "Lol";
 
-        String url = "http://54.218.48.30:8080/checkuser";
+        String url = "http://10.0.2.2:8080/checkuser";
 
         final Map<String, String> postParam= new HashMap<String, String>();
         //postParam.put("id", "228");
-        postParam.put("email", etEmail.getText().toString());
+        postParam.put("username", etUsername.getText().toString());
         //postParam.put("username", etUsername.getText().toString());
         postParam.put("password", etPassword.getText().toString());
 
@@ -96,6 +101,7 @@ public class Login_Activity extends AppCompatActivity {
                 //okResponse = response.toString();
                 //msgResponse.setText(response.toString());
                 //hideProgressDialog();
+
                 checkOkValue();
             }
         }, new Response.ErrorListener() {
@@ -126,8 +132,9 @@ public class Login_Activity extends AppCompatActivity {
                 HashMap<String, String> headers = new HashMap<String, String>();
                 headers.put("Content-Type", "application/json; charset=utf-8");
                 //put credentials here
-                String plainCredentials=etEmail.getText().toString()+":"+etPassword.getText().toString();
+                String plainCredentials = etUsername.getText().toString()+":"+etPassword.getText().toString();
                 String base64Credentials = new String(Base64.encodeBase64(plainCredentials.getBytes()));
+                credentials = base64Credentials;
                 headers.put("Authorization", "Basic " + base64Credentials);
                 return headers;
             }
@@ -158,9 +165,10 @@ public class Login_Activity extends AppCompatActivity {
     public void checkOkValue() {
         if(okValue != null) {
             Log.d("sa2", okValue);
-            Intent intent = new Intent(this, MainActivity.class);
-            intent.putExtra("Ok", okValue.substring(4, okValue.length()));
-            startActivity(intent);
+//            Intent intent = new Intent(this, MainActivity.class);
+//            intent.putExtra("Ok", okValue.substring(4, okValue.length()));
+//            startActivity(intent);
+            getAudio();
         }
     }
 
