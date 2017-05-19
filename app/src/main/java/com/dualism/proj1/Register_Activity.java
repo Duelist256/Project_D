@@ -58,7 +58,7 @@ public class Register_Activity extends AppCompatActivity {
         final String TAG = "Lol";
         RequestQueue queue = Volley.newRequestQueue(this);
 
-        String url = "http://25.80.63.196:8080/saveuser";
+        String url = "http://54.218.48.30:8080/saveuser";
 
         //postParam.put("id", "228");
         if(validateEmail(etEmail.getText().toString()) == true) {
@@ -120,7 +120,9 @@ public class Register_Activity extends AppCompatActivity {
 
             };
 
-            queue.add(jsonObjReq);
+        // Adding request to request queue
+        //AppController.getInstance().addToRequestQueue(jsonObjReq,tag_json_obj);
+        queue.add(jsonObjReq);
         }
         else {
             Toast.makeText(Register_Activity.this, "Wrong Email! Please try again!", Toast.LENGTH_SHORT).show();
