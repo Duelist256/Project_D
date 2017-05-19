@@ -32,6 +32,8 @@ import org.json.JSONObject;
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Register_Activity extends AppCompatActivity {
     //Button bRegister;
@@ -46,19 +48,8 @@ public class Register_Activity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
 
         etName = (EditText) findViewById(R.id.etName);
-        //etAge = (EditText) findViewById(R.id.etAge);
         etEmail = (EditText) findViewById(R.id.etEmail);
         etPassword= (EditText) findViewById(R.id.etPassword);
-
-        /*try {
-            okResponse = new JSONObject("{\"value\":\"Ok\"}");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }*/
-
-        //lelResponse = "{\"value\":\"Ok\"}";
-        /*bRegister = (Button) findViewById(R.id.bRegister);
-        bRegister.setOnClickListener(this);*/
     }
 
     public void register(View view) {
@@ -69,69 +60,73 @@ public class Register_Activity extends AppCompatActivity {
 
         String url = "http://54.218.48.30:8080/saveuser";
 
-        final Map<String, String> postParam= new HashMap<String, String>();
         //postParam.put("id", "228");
-        postParam.put("email", etEmail.getText().toString());
-        postParam.put("username", etName.getText().toString());
-        postParam.put("password", etPassword.getText().toString());
+        if(validateEmail(etEmail.getText().toString()) == true) {
+            final Map<String, String> postParam= new HashMap<String, String>();
+            postParam.put("email", etEmail.getText().toString());
+            postParam.put("username", etName.getText().toString());
+            postParam.put("password", etPassword.getText().toString());
 
-        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST,
-                url, new JSONObject(postParam),
-                new Response.Listener<JSONObject>() {
+            JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST,
+                    url, new JSONObject(postParam),
+                    new Response.Listener<JSONObject>() {
 
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        Log.d(TAG, response.toString());
-                        okResponse = response;
-                        try {
-                            okResp = response.getString("value");
-                        } catch (JSONException e) {
-                            e.printStackTrace();
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            Log.d(TAG, response.toString());
+                            okResponse = response;
+                            try {
+                                okResp = response.getString("value");
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                            //okResponse = response.toString();
+                            //msgResponse.setText(response.toString());
+                            //hideProgressDialog();
+                            checkOkResp();
                         }
-                        //okResponse = response.toString();
-                        //msgResponse.setText(response.toString());
-                        //hideProgressDialog();
-                        checkOkResp();
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        //VolleyLog.d(TAG, "Error: " + error.getMessage());
-                        //hideProgressDialog();
-                        // System.out.println("Ty che mm?");
-                        if (error instanceof TimeoutError || error instanceof NoConnectionError) {
-                            Log.d("TimeoutError", "TE");
-                        } else if (error instanceof AuthFailureError) {
-                            Log.d("AuthFailureError", "AFE");
-                        } else if (error instanceof ServerError) {
-                            Log.d("ServerError", "SE");
-                        } else if (error instanceof NetworkError) {
-                            Log.d("NetworkError", "NE");
-                        } else if (error instanceof ParseError) {
-                            Log.d("ParseError", "PE");
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            //VolleyLog.d(TAG, "Error: " + error.getMessage());
+                            //hideProgressDialog();
+                            // System.out.println("Ty che mm?");
+                            if (error instanceof TimeoutError || error instanceof NoConnectionError) {
+                                Log.d("TimeoutError", "TE");
+                            } else if (error instanceof AuthFailureError) {
+                                Log.d("AuthFailureError", "AFE");
+                            } else if (error instanceof ServerError) {
+                                Log.d("ServerError", "SE");
+                            } else if (error instanceof NetworkError) {
+                                Log.d("NetworkError", "NE");
+                            } else if (error instanceof ParseError) {
+                                Log.d("ParseError", "PE");
+                            }
                         }
+                    }) {
+
+                /*
+                 Passing some request headers
+                 */
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    HashMap<String, String> headers = new HashMap<String, String>();
+                    headers.put("Content-Type", "application/json; charset=utf-8");
+                    return headers;
                 }
-        }) {
-
-            /*
-             Passing some request headers
-             */
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                HashMap<String, String> headers = new HashMap<String, String>();
-                headers.put("Content-Type", "application/json; charset=utf-8");
-                return headers;
-            }
 
 
 
-        };
+            };
 
         // Adding request to request queue
         //AppController.getInstance().addToRequestQueue(jsonObjReq,tag_json_obj);
         queue.add(jsonObjReq);
-
+        }
+        else {
+            Toast.makeText(Register_Activity.this, "Wrong Email! Please try again!", Toast.LENGTH_SHORT).show();
+        }
     }
 
     public void checkOkResp() {
@@ -140,5 +135,14 @@ public class Register_Activity extends AppCompatActivity {
             intent.putExtra("Ok", etName.getText().toString());
             startActivity(intent);
         }
+    }
+
+    public boolean validateEmail(String email) {
+        Pattern pattern;
+        Matcher matcher;
+        String EMAIL_PATTERN = "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+        pattern = Pattern.compile(EMAIL_PATTERN);
+        matcher = pattern.matcher(email);
+        return matcher.matches();
     }
 }
