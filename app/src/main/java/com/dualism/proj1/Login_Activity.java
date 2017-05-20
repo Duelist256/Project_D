@@ -75,7 +75,7 @@ public class Login_Activity extends AppCompatActivity {
         //
         final String TAG = "Lol";
 
-        String url = "http://25.80.63.196:8080/checkuser";
+        String url = "http://54.218.48.30:8080/checkuser";
 
         final Map<String, String> postParam= new HashMap<String, String>();
         //postParam.put("id", "228");
