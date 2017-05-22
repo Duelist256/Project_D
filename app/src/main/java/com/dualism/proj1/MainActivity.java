@@ -58,4 +58,10 @@ public class MainActivity extends AppCompatActivity {
         //intent.putExtra();
         startActivity(intent);
     }
+
+    public void getAudio(View view) {
+        Intent intent = new Intent(this, GetAudio.class);
+        intent.putExtra("credentials", getIntent().getStringExtra("credentials"));
+        startActivity(intent);
+    }
 }

@@ -63,24 +63,20 @@ public class Login_Activity extends AppCompatActivity {
     }
 
     public void getAudio() {
-        Intent intent = new Intent(this, GetAudio.class);
+        Intent intent = new Intent(this, MainActivity.class);
         intent.putExtra("credentials", credentials);
         startActivity(intent);
         //startActivity(new Intent(this, GetAudio.class));
     }
 
     public void login(View view) {
-        //temporary line
-        //getAudio();
-        //
+
         final String TAG = "Lol";
 
         String url = "http://54.218.48.30:8080/checkuser";
 
         final Map<String, String> postParam= new HashMap<String, String>();
-        //postParam.put("id", "228");
         postParam.put("username", etUsername.getText().toString());
-        //postParam.put("username", etUsername.getText().toString());
         postParam.put("password", etPassword.getText().toString());
 
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST,
@@ -98,18 +94,11 @@ public class Login_Activity extends AppCompatActivity {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                //okResponse = response.toString();
-                //msgResponse.setText(response.toString());
-                //hideProgressDialog();
-
                 checkOkValue();
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                //VolleyLog.d(TAG, "Error: " + error.getMessage());
-                //hideProgressDialog();
-                // System.out.println("Ty che mm?");
                 if (error instanceof TimeoutError || error instanceof NoConnectionError) {
                     Log.d("TE", "TimeoutError");
                 } else if (error instanceof AuthFailureError) {
@@ -142,24 +131,8 @@ public class Login_Activity extends AppCompatActivity {
 
         };
 
-        // Adding request to request queue
-        //AppController.getInstance().addToRequestQueue(jsonObjReq,tag_json_obj);
-
         queue.add(jsonObjReq);
 
-
-        //Log.d("mem", okValue);
-        /*if (okValue.substring(0, 2).equals("Ok")) {
-            Intent intent = new Intent(this, MainActivity.class);
-            startActivity(intent);
-        }*/
-
-        /*if (isResponsesEqual) {
-            Intent intent = new Intent(this, MainActivity.class);
-            startActivity(intent);
-        }*/
-
-        //startActivity(new Intent(this, MainActivity.class));
     }
 
     public void checkOkValue() {
