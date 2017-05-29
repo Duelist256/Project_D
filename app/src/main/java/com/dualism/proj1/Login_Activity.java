@@ -65,6 +65,7 @@ public class Login_Activity extends AppCompatActivity {
     public void getAudio() {
         Intent intent = new Intent(this, MainActivity.class);
         intent.putExtra("credentials", credentials);
+        intent.putExtra("Ok", okValue.substring(4));
         startActivity(intent);
         //startActivity(new Intent(this, GetAudio.class));
     }

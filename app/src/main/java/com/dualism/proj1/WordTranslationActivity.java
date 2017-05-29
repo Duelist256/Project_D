@@ -1,5 +1,6 @@
 package com.dualism.proj1;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dualism.proj1.DB.DatabaseHandler;
+import com.dualism.proj1.Services.PlayAudioService;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -57,6 +59,11 @@ public class WordTranslationActivity extends AppCompatActivity {
             if(tvWord.getText().toString().equals(TranslTest[i].getWord())) {
                 if (answer.equals(TranslTest[i].getTranslation())) {
                     messageResId = R.string.correct_toast;
+                    Intent intent = getIntent();
+                    Intent intent1 = new Intent(this, PlayAudioService.class);
+                    intent1.putExtra("word", TranslTest[i].getWord());
+                    intent1.putExtra("credentials", intent.getStringExtra("credentials"));
+                    startService(intent1);
                     break;
                 }
                 messageResId = R.string.incorrect_toast;

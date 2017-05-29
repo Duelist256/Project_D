@@ -6,6 +6,16 @@
     <string name="gr_practice_name">Grammar Practice</string>
     <string name="word_transl_name">Word-Translation</string>
     <string name="transl_word_name">Translation-Word</string>
+    <string name="audio_word_name">Auditon</string>
+    <string name="speaking_name">Speaking</string>
     <string name="incorrect_toast">Incorrect!</string>
     <string name="correct_toast">Correct!</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

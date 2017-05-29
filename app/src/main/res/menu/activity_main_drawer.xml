@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_my_dict"
+            android:icon="@mipmap/ic_import_contacts_black_24dp"
+            android:title="My Dictionaries" />
+        <item
+            android:id="@+id/nav_learn_words"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="Learn Words" />
+        <item
+            android:id="@+id/nav_gram_book"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Menu 3" />
+    </group>
+</menu>
