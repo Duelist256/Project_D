@@ -62,7 +62,7 @@ public class Login_Activity extends AppCompatActivity {
         tvRegisterLink.setOnClickListener(this);*/
     }
 
-    public void getAudio() {
+    public void sendCredentials() {
         Intent intent = new Intent(this, MainActivity.class);
         intent.putExtra("credentials", credentials);
         intent.putExtra("Ok", okValue.substring(4));
@@ -142,7 +142,7 @@ public class Login_Activity extends AppCompatActivity {
 //            Intent intent = new Intent(this, MainActivity.class);
 //            intent.putExtra("Ok", okValue.substring(4, okValue.length()));
 //            startActivity(intent);
-            getAudio();
+            sendCredentials();
         }
     }
 

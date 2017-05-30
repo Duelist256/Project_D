@@ -2,6 +2,7 @@ package com.dualism.proj1.Services;
 
 import android.app.Service;
 import android.content.Intent;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.IBinder;
 import android.util.Base64;
@@ -16,6 +17,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
@@ -60,7 +62,7 @@ public class PlayAudioService extends Service {
         new Thread(new Runnable() {
             public void run() {
                 playAudio(word);
-                //stopSelf();
+                stopSelf();
             }
         }).start();
     }
@@ -104,6 +106,7 @@ public class PlayAudioService extends Service {
     private void decodeAudio(String strAudio) {
         byte[] audio = Base64.decode(strAudio, Base64.DEFAULT);
         File outputFile = null;
+
         try {
             //write received byte array to file
             outputFile = new File(getFilesDir()+File.separator+word+".flac");
@@ -117,6 +120,10 @@ public class PlayAudioService extends Service {
 
         try {
             //testing audio file
+            if (outputFile.exists()) {
+                outputFile.setReadable(true, false);
+            }
+
             mediaPlayer.setDataSource(outputFile.getAbsolutePath());
             mediaPlayer.prepare();
             mediaPlayer.start();

@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.dualism.proj1.MainActivity;
 import com.dualism.proj1.R;
+import com.dualism.proj1.SpeakingActivity;
 import com.dualism.proj1.TranslationWordActivity;
 import com.dualism.proj1.WordTranslationActivity;
 
@@ -20,6 +21,9 @@ import com.dualism.proj1.WordTranslationActivity;
  */
 
 public class LearnWordsFragment extends Fragment {
+
+    Button wordTranslationButton, translationWordButton, speakingButton;
+
     public LearnWordsFragment () {
 
     }
@@ -31,13 +35,14 @@ public class LearnWordsFragment extends Fragment {
         //TextView textView = (TextView) getView().findViewById(R.id.word_translation_button);
         //textView.setText("ekea"); // mowno delat tak, mowet bb|t dawe nuwno!!11
 
-        Button wordTranslationButton, translationWordButton;
+
 
         wordTranslationButton = (Button) getView().findViewById(R.id.word_translation_button);
         wordTranslationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), WordTranslationActivity.class);
+                intent.putExtra("credentials", getActivity().getIntent().getStringExtra("credentials"));
                 startActivity(intent);
             }
         });
@@ -47,6 +52,17 @@ public class LearnWordsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), TranslationWordActivity.class);
+                intent.putExtra("credentials", getActivity().getIntent().getStringExtra("credentials"));
+                startActivity(intent);
+            }
+        });
+
+        speakingButton = (Button) getView().findViewById(R.id.speaking_button);
+        speakingButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), SpeakingActivity.class);
+                intent.putExtra("credentials", getActivity().getIntent().getStringExtra("credentials"));
                 startActivity(intent);
             }
         });
