@@ -1,5 +1,6 @@
 package com.dualism.proj1;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -7,18 +8,25 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.dualism.proj1.Services.PlayAudioService;
+
 import java.util.Arrays;
 import java.util.Collections;
 
 public class TranslationWordActivity extends AppCompatActivity {
 
     private TextView tvTranslation;
-    private TextView truwnost;
 
     private Button btnWord1;
     private Button btnWord2;
     private Button btnWord3;
     private Button btnWord4;
+
+    Button nextBtn;
+
+    private Intent intent1;
+
+    private boolean isTrue;
 
     private WordTranslation[] TranslTest = new WordTranslation[] {
             new WordTranslation("dog", "собака"),
@@ -44,6 +52,19 @@ public class TranslationWordActivity extends AppCompatActivity {
         btnWord2.setText(words[1]);
         btnWord3.setText(words[2]);
         btnWord4.setText(words[3]);
+
+        btnWord1.setEnabled(true);
+        btnWord2.setEnabled(true);
+        btnWord3.setEnabled(true);
+        btnWord4.setEnabled(true);
+        nextBtn.setEnabled(false);
+
+        btnWord1.setBackgroundResource(android.R.drawable.btn_default);
+        btnWord2.setBackgroundResource(android.R.drawable.btn_default);
+        btnWord3.setBackgroundResource(android.R.drawable.btn_default);
+        btnWord4.setBackgroundResource(android.R.drawable.btn_default);
+
+        isTrue = false;
     }
 
     private void checkAnswer(String answer){
@@ -53,18 +74,40 @@ public class TranslationWordActivity extends AppCompatActivity {
             if(tvTranslation.getText().toString().equals(TranslTest[i].getTranslation())) {
                 if (answer.equals(TranslTest[i].getWord())) {
                     messageResId = R.string.correct_toast;
+                    Intent intent = getIntent();
+                    intent1 = new Intent(this, PlayAudioService.class);
+                    intent1.putExtra("word", TranslTest[i].getWord());
+                    intent1.putExtra("credentials", intent.getStringExtra("credentials"));
+                    startService(intent1);
+                    isTrue = true;
                     break;
                 }
                 messageResId = R.string.incorrect_toast;
             }
         }
+        btnWord1.setEnabled(false);
+        btnWord2.setEnabled(false);
+        btnWord3.setEnabled(false);
+        btnWord4.setEnabled(false);
+        nextBtn.setEnabled(true);
+
         Toast.makeText(this, messageResId, Toast.LENGTH_SHORT).show();
+    }
+
+    private void setBackgroundColor(Button button, boolean isTrue) {
+        if(isTrue) {
+            button.setBackgroundColor(getResources().getColor(R.color.trueAnswer));
+        } else {
+            button.setBackgroundColor(getResources().getColor(R.color.falseAnswer));
+        }
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_translation_word);
+
+        isTrue = false;
 
         tvTranslation = (TextView) findViewById(R.id.tvTranslation);
 
@@ -74,6 +117,7 @@ public class TranslationWordActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 checkAnswer(btnWord1.getText().toString());
+                setBackgroundColor(btnWord1, isTrue);
             }
         });
 
@@ -82,6 +126,7 @@ public class TranslationWordActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 checkAnswer(btnWord2.getText().toString());
+                setBackgroundColor(btnWord2, isTrue);
             }
         });
 
@@ -90,6 +135,7 @@ public class TranslationWordActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 checkAnswer(btnWord3.getText().toString());
+                setBackgroundColor(btnWord3, isTrue);
             }
         });
 
@@ -98,11 +144,12 @@ public class TranslationWordActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 checkAnswer(btnWord4.getText().toString());
+                setBackgroundColor(btnWord4, isTrue);
             }
         });
 
         // "Next" button is here
-        Button nextBtn = (Button) findViewById(R.id.btnNext2);
+        nextBtn = (Button) findViewById(R.id.btnNext2);
         nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -110,6 +157,8 @@ public class TranslationWordActivity extends AppCompatActivity {
                 updateQuestion();
             }
         });
+        nextBtn.setBackgroundResource(android.R.drawable.btn_default);
+
         updateQuestion();
     }
 }

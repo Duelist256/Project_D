@@ -59,6 +59,7 @@ public class WordTranslationActivity extends AppCompatActivity {
         transl2.setEnabled(true);
         transl3.setEnabled(true);
         transl4.setEnabled(true);
+        nextBtn.setEnabled(false);
 
         transl1.setBackgroundResource(android.R.drawable.btn_default);
         transl2.setBackgroundResource(android.R.drawable.btn_default);
@@ -92,6 +93,7 @@ public class WordTranslationActivity extends AppCompatActivity {
         transl2.setEnabled(false);
         transl3.setEnabled(false);
         transl4.setEnabled(false);
+        nextBtn.setEnabled(true);
         Toast.makeText(this, messageResId, Toast.LENGTH_SHORT).show();
     }
 

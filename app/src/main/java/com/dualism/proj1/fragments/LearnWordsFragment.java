@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.dualism.proj1.AuditionActivity;
 import com.dualism.proj1.MainActivity;
 import com.dualism.proj1.R;
 import com.dualism.proj1.SpeakingActivity;
@@ -22,7 +23,7 @@ import com.dualism.proj1.WordTranslationActivity;
 
 public class LearnWordsFragment extends Fragment {
 
-    Button wordTranslationButton, translationWordButton, speakingButton;
+    Button wordTranslationButton, translationWordButton, auditonButton, speakingButton;
 
     public LearnWordsFragment () {
 
@@ -52,6 +53,16 @@ public class LearnWordsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), TranslationWordActivity.class);
+                intent.putExtra("credentials", getActivity().getIntent().getStringExtra("credentials"));
+                startActivity(intent);
+            }
+        });
+
+        auditonButton = (Button) getView().findViewById(R.id.audio_word_button);
+        auditonButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), AuditionActivity.class);
                 intent.putExtra("credentials", getActivity().getIntent().getStringExtra("credentials"));
                 startActivity(intent);
             }

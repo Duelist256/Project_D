@@ -24,7 +24,7 @@
         android:layout_marginRight="15dp"
         android:layout_weight="1"
         android:textSize="30sp"
-        android:text="@string/word_transl_name"/>
+        android:text="@string/transl_word_name"/>
 
     <Button
         android:id="@+id/audio_word_button"

@@ -10,6 +10,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.dualism.proj1.Services.PlayAudioService;
+
 import java.util.ArrayList;
 import java.util.Locale;
 
@@ -22,6 +24,7 @@ public class SpeakingActivity extends AppCompatActivity {
     private String [] words;
 
     private int currentIndex;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +64,6 @@ public class SpeakingActivity extends AppCompatActivity {
                 updateWord();
             }
         });
-
     }
 
     @Override
