@@ -14,9 +14,10 @@
         android:layout_height="wrap_content"
         android:text="Repeat"
         android:textSize="20sp"
-        android:layout_alignBaseline="@+id/right_text_view_audition"
-        android:layout_alignBottom="@+id/right_text_view_audition"
-        android:layout_centerHorizontal="true"/>
+        android:layout_below="@+id/audition_edit_text"
+        android:layout_alignLeft="@+id/audition_edit_text"
+        android:layout_alignStart="@+id/audition_edit_text"
+        android:layout_marginTop="27dp"/>
 
     <EditText
         android:id="@+id/audition_edit_text"
@@ -31,11 +32,11 @@
         android:id="@+id/audition_right_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="106dp"
         android:textSize="30sp"
-        android:text="TextView"/>
+        android:text="TextView"
+        android:layout_marginBottom="34dp"
+        android:layout_above="@+id/audition_edit_text"
+        android:layout_centerHorizontal="true"/>
 
     <Button
         android:id="@+id/audition_next_button"
@@ -47,5 +48,15 @@
         android:layout_marginBottom="24dp"
         android:layout_marginEnd="17dp"
         android:layout_marginRight="17dp"
+        android:textSize="20sp"
         android:text="Next"/>
+
+    <Button
+        android:id="@+id/audition_check_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/audition_edit_text"
+        android:layout_alignRight="@+id/audition_edit_text"
+        android:layout_alignTop="@+id/audition_repeat_button"
+        android:text="Button"/>
 </RelativeLayout>

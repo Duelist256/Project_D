@@ -58,7 +58,7 @@ public class LearnWordsFragment extends Fragment {
             }
         });
 
-        auditonButton = (Button) getView().findViewById(R.id.audio_word_button);
+        /*auditonButton = (Button) getView().findViewById(R.id.audio_word_button);
         auditonButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -66,7 +66,7 @@ public class LearnWordsFragment extends Fragment {
                 intent.putExtra("credentials", getActivity().getIntent().getStringExtra("credentials"));
                 startActivity(intent);
             }
-        });
+        });*/
 
         speakingButton = (Button) getView().findViewById(R.id.speaking_button);
         speakingButton.setOnClickListener(new View.OnClickListener() {
