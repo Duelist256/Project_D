@@ -54,12 +54,6 @@ public class Login_Activity extends AppCompatActivity {
         etUsername= (EditText) findViewById(R.id.etEmail);
         etPassword = (EditText) findViewById(R.id.etPassword);
         queue = Volley.newRequestQueue(this);
-
-        /*bLogin = (Button) findViewById(R.id.bLogin);
-        bLogin.setOnClickListener(this);
-
-        tvRegisterLink = (TextView) findViewById(R.id.tvRegisterLink);
-        tvRegisterLink.setOnClickListener(this);*/
     }
 
     public void sendCredentials() {
@@ -67,7 +61,6 @@ public class Login_Activity extends AppCompatActivity {
         intent.putExtra("credentials", credentials);
         intent.putExtra("Ok", okValue.substring(4));
         startActivity(intent);
-        //startActivity(new Intent(this, GetAudio.class));
     }
 
     public void login(View view) {
@@ -139,9 +132,6 @@ public class Login_Activity extends AppCompatActivity {
     public void checkOkValue() {
         if(okValue != null) {
             Log.d("sa2", okValue);
-//            Intent intent = new Intent(this, MainActivity.class);
-//            intent.putExtra("Ok", okValue.substring(4, okValue.length()));
-//            startActivity(intent);
             sendCredentials();
         }
     }

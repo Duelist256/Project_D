@@ -36,7 +36,8 @@
         </activity>
         <activity android:name=".SpeakingActivity">
         </activity>
-        <activity android:name=".AuditionActivity">
+        <activity android:name=".AuditionActivity"
+                  android:windowSoftInputMode="adjustPan">
         </activity>
     </application>
 

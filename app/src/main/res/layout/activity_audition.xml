@@ -26,6 +26,8 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:ems="10"
+        android:textSize="25sp"
+        android:textAlignment="center"
         android:inputType="textPersonName"/>
 
     <TextView
@@ -58,5 +60,6 @@
         android:layout_alignEnd="@+id/audition_edit_text"
         android:layout_alignRight="@+id/audition_edit_text"
         android:layout_alignTop="@+id/audition_repeat_button"
-        android:text="Button"/>
+        android:textSize="20sp"
+        android:text="Check"/>
 </RelativeLayout>

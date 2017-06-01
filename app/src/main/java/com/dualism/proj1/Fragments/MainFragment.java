@@ -1,4 +1,4 @@
-package com.dualism.proj1.fragments;
+package com.dualism.proj1.Fragments;
 
 import android.content.Context;
 import android.net.Uri;

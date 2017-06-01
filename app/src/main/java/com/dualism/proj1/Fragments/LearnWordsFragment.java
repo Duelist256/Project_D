@@ -1,4 +1,4 @@
-package com.dualism.proj1.fragments;
+package com.dualism.proj1.Fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,10 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
 
 import com.dualism.proj1.AuditionActivity;
-import com.dualism.proj1.MainActivity;
 import com.dualism.proj1.R;
 import com.dualism.proj1.SpeakingActivity;
 import com.dualism.proj1.TranslationWordActivity;
@@ -36,8 +34,6 @@ public class LearnWordsFragment extends Fragment {
         //TextView textView = (TextView) getView().findViewById(R.id.word_translation_button);
         //textView.setText("ekea"); // mowno delat tak, mowet bb|t dawe nuwno!!11
 
-
-
         wordTranslationButton = (Button) getView().findViewById(R.id.word_translation_button);
         wordTranslationButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,7 +54,7 @@ public class LearnWordsFragment extends Fragment {
             }
         });
 
-        /*auditonButton = (Button) getView().findViewById(R.id.audio_word_button);
+        auditonButton = (Button) getView().findViewById(R.id.audio_word_button);
         auditonButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -66,7 +62,7 @@ public class LearnWordsFragment extends Fragment {
                 intent.putExtra("credentials", getActivity().getIntent().getStringExtra("credentials"));
                 startActivity(intent);
             }
-        });*/
+        });
 
         speakingButton = (Button) getView().findViewById(R.id.speaking_button);
         speakingButton.setOnClickListener(new View.OnClickListener() {

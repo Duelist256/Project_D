@@ -107,6 +107,8 @@ public class TranslationWordActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_translation_word);
 
+        getSupportActionBar().setTitle("Translation-Word");
+
         isTrue = false;
 
         tvTranslation = (TextView) findViewById(R.id.tvTranslation);

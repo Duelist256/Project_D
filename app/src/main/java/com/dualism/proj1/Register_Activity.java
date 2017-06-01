@@ -37,9 +37,9 @@ import java.util.regex.Pattern;
 
 public class Register_Activity extends AppCompatActivity {
     //Button bRegister;
-    EditText etName, etEmail, etPassword;
-    JSONObject okResponse;
-    String okResp;
+    private EditText etName, etEmail, etPassword;
+    private JSONObject okResponse;
+    private String okResp;
 
     private boolean isResponsesEqual = false;
     @Override
@@ -80,9 +80,7 @@ public class Register_Activity extends AppCompatActivity {
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
-                            //okResponse = response.toString();
-                            //msgResponse.setText(response.toString());
-                            //hideProgressDialog();
+
                             checkOkResp();
                         }
                     },

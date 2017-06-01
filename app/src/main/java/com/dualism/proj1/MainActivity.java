@@ -18,16 +18,39 @@ import android.view.MenuItem;
 import com.android.volley.RequestQueue;
 
 import com.android.volley.toolbox.Volley;
-import com.dualism.proj1.DB.DatabaseHandler;
 
+import com.dualism.proj1.Fragments.LearnWordsFragment;
+import com.dualism.proj1.Fragments.Menu3;
+import com.dualism.proj1.Fragments.MyDictionaryFragment;
 
-import com.dualism.proj1.fragments.LearnWordsFragment;
+/***  Create sample data
+ *
+ *  Word sampleWord = new Word();
+ *  sampleWord.setWord("dog");
+ *  sampleWord.setTranslation("собака");
+ *
+ *  Word sampleWord1 = new Word();
+ *  sampleWord1.setWord("cat");
+ *  sampleWord1.setTranslation("кошка");
+ *
+ *  //Get singleton instance of database
+ *  DBHelper databaseHelper = DBHelper.getInstance(this);
+ *
+ *  databaseHelper.deleteAllWords();
+ *  // Add sample post to the database
+ *  databaseHelper.addWord(sampleWord);
+ *  databaseHelper.addWord(sampleWord1);
+ *
+ *  // Get all posts from database
+ *  List<Word> words = databaseHelper.getAllWords();
 
-import com.dualism.proj1.fragments.Menu3;
-import com.dualism.proj1.fragments.MyDictionaryFragment;
+ *  for (Word word : words) {
+ *      Log.d("DB", word.getWord() + " - " + word.getTranslation());
+ *  }
+ ***/
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
-    DatabaseHandler db;
+
     RequestQueue queue;
 
     private Bundle mBundle;
@@ -56,6 +79,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mBundle.putString("credentials", string);
 
         queue = Volley.newRequestQueue(this);
+
+
     }
 
     @Override

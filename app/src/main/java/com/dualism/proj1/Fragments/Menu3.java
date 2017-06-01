@@ -1,4 +1,4 @@
-package com.dualism.proj1.fragments;
+package com.dualism.proj1.Fragments;
 
 
 import android.content.Intent;
@@ -12,7 +12,6 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.dualism.proj1.R;
-import com.dualism.proj1.Services.MyService;
 import com.dualism.proj1.Services.PlayAudioService;
 
 

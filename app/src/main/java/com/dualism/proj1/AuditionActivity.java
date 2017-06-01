@@ -19,7 +19,7 @@ public class AuditionActivity extends AppCompatActivity {
     private String [] words;
     private int currentIndex;
 
-    final Intent intent = getIntent();
+    private Intent intent;
     private Intent intent1;
 
     @Override
@@ -27,7 +27,7 @@ public class AuditionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_audition);
 
-        intent1 = new Intent(this, PlayAudioService.class);
+        getSupportActionBar().setTitle("Audition");
 
         words = new String[] {"cat", "dog", "help", "frog"};
 
@@ -36,6 +36,7 @@ public class AuditionActivity extends AppCompatActivity {
         rightTextView = (TextView) findViewById(R.id.audition_right_text_view);
         rightTextView.setVisibility(View.INVISIBLE);
 
+        intent = getIntent();
 
         repeatButton = (Button) findViewById(R.id.audition_repeat_button);
         repeatButton.setOnClickListener(new View.OnClickListener() {
@@ -51,12 +52,17 @@ public class AuditionActivity extends AppCompatActivity {
         checkButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (auditionEditText.getText().toString().equals(words[currentIndex])) {
+                if (auditionEditText.getText().toString().equalsIgnoreCase(words[currentIndex])) {
                     rightTextView.setVisibility(View.VISIBLE);
                     rightTextView.setText("Right!");
+                    rightTextView.setBackgroundResource(R.color.trueAnswer);
+                    nextButton.setVisibility(View.VISIBLE);
+                    auditionEditText.setFocusable(false);
+                    checkButton.setEnabled(false);
                 } else {
                     rightTextView.setVisibility(View.VISIBLE);
                     rightTextView.setText("Try now!");
+                    rightTextView.setBackgroundResource(R.color.falseAnswer);
                 }
             }
         });
@@ -74,10 +80,14 @@ public class AuditionActivity extends AppCompatActivity {
     }
 
     private void updateWord() {
+        intent1 = new Intent(this, PlayAudioService.class);
         intent1.putExtra("word", words[currentIndex]);
         intent1.putExtra("credentials", intent.getStringExtra("credentials"));
         startService(intent1);
-
+        nextButton.setVisibility(View.INVISIBLE);
         rightTextView.setVisibility(View.INVISIBLE);
+        auditionEditText.setText("");
+        auditionEditText.setFocusableInTouchMode(true);
+        checkButton.setEnabled(true);
     }
 }

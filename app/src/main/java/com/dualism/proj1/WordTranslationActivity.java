@@ -8,7 +8,6 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.dualism.proj1.DB.DatabaseHandler;
 import com.dualism.proj1.Services.PlayAudioService;
 
 import java.util.Arrays;
@@ -35,7 +34,6 @@ public class WordTranslationActivity extends AppCompatActivity {
             new WordTranslation("bird", "птица"),
     };
 
-    //DatabaseHandler mDatabaseHandler = new DatabaseHandler(this);
 
     private int CurrentIndex;
 
@@ -111,6 +109,7 @@ public class WordTranslationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_word_translation);
         //String[] appCategoryDetail = mDatabaseHandler.getAppCategoryDetail();
+        getSupportActionBar().setTitle("Word-Translation");
 
         isTrue = false;
 

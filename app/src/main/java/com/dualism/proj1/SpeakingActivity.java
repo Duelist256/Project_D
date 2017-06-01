@@ -25,16 +25,31 @@ public class SpeakingActivity extends AppCompatActivity {
 
     private int currentIndex;
 
+    private Intent intent;
+    private Intent intent1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_speaking);
 
+        getSupportActionBar().setTitle("Speaking");
+
+        intent = getIntent();
+
         words = new String[] {"cat", "dog", "help", "frog"};
 
         wordTextView = (TextView) findViewById(R.id.speaking_word_text_view);
         wordTextView.setText(words[currentIndex]);
+
+        wordTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent1.putExtra("word", words[currentIndex]);
+                intent1.putExtra("credentials", intent.getStringExtra("credentials"));
+                startService(intent1);
+            }
+        });
 
         rightTextView = (TextView) findViewById(R.id.right_text_view);
         rightTextView.setVisibility(View.INVISIBLE);
@@ -64,6 +79,8 @@ public class SpeakingActivity extends AppCompatActivity {
                 updateWord();
             }
         });
+
+        updateWord();
     }
 
     @Override
@@ -91,5 +108,10 @@ public class SpeakingActivity extends AppCompatActivity {
         wordTextView.setText(words[currentIndex]);
         rightTextView.setVisibility(View.INVISIBLE);
         sayButton.setVisibility(View.VISIBLE);
+
+        intent1 = new Intent(this, PlayAudioService.class);
+        intent1.putExtra("word", words[currentIndex]);
+        intent1.putExtra("credentials", intent.getStringExtra("credentials"));
+        startService(intent1);
     }
 }
