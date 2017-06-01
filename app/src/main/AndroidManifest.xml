@@ -30,8 +30,6 @@
         <activity android:name=".LearnWordsActivity"/>
         <activity android:name=".WordTranslationActivity"/>
         <activity android:name=".Register_Activity"/>
-        <activity android:name=".GetAudio">
-        </activity>
         <activity android:name=".TranslationWordActivity">
         </activity>
         <activity android:name=".SpeakingActivity">

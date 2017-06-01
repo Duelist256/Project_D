@@ -4,6 +4,12 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical">
+    <Button
+        android:id="@+id/get_words"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Get Words"
+        android:onClick="getWords"/>
     <ListView
         android:id="@+id/word_list_view"
         android:layout_width="match_parent"
