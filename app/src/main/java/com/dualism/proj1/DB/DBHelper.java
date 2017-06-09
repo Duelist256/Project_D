@@ -87,7 +87,7 @@ public class DBHelper extends SQLiteOpenHelper {
         }
     }
 
-    // Insert a post into the database
+    // Insert a word into the database
     public void addWord(Word word) {
         // Create and/or open the database for writing
         SQLiteDatabase db = getWritableDatabase();
@@ -99,12 +99,41 @@ public class DBHelper extends SQLiteOpenHelper {
             // The user might already exist in the database (i.e. the same user created multiple posts).
             //long userId = addOrUpdateUser(word.user);
 
+
             ContentValues values = new ContentValues();
             values.put(KEY_WORDS_WORD, word.getWord());
             values.put(KEY_WORDS_TRANSLATION, word.getTranslation());
 
             // Notice how we haven't specified the primary key. SQLite auto increments the primary key column.
-            db.insertOrThrow(TABLE_WORDS, null, values);
+            db.insert(TABLE_WORDS, null, values);
+            db.setTransactionSuccessful();
+        } catch (Exception e) {
+            Log.d(TAG, "Error while trying to add post to database");
+        } finally {
+            db.endTransaction();
+        }
+    }
+
+    // Insert words into the database
+    public void addWords(List<Word> words) {
+        // Create and/or open the database for writing
+        SQLiteDatabase db = getWritableDatabase();
+
+        // It's a good idea to wrap our insert in a transaction. This helps with performance and ensures
+        // consistency of the database.
+        db.beginTransaction();
+        try {
+            // The user might already exist in the database (i.e. the same user created multiple posts).
+            //long userId = addOrUpdateUser(word.user);
+
+
+            ContentValues values = new ContentValues();
+            for (Word word: words) {
+                values.put(KEY_WORDS_WORD, word.getWord());
+                values.put(KEY_WORDS_TRANSLATION, word.getTranslation());
+                // Notice how we haven't specified the primary key. SQLite auto increments the primary key column.
+                db.insert(TABLE_WORDS, null, values);
+            }
             db.setTransactionSuccessful();
         } catch (Exception e) {
             Log.d(TAG, "Error while trying to add post to database");

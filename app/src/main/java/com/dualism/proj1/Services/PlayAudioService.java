@@ -4,6 +4,8 @@ import android.app.Service;
 import android.content.Intent;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
+import android.net.Uri;
+import android.net.rtp.AudioStream;
 import android.os.IBinder;
 import android.util.Base64;
 import android.util.Log;
@@ -16,10 +18,14 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -68,7 +74,7 @@ public class PlayAudioService extends Service {
     }
 
 
-    private void playAudio(String word) {
+    private void playAudio(final String word) {
         RequestQueue queue = Volley.newRequestQueue(this);
         mediaPlayer = new MediaPlayer();
         final String TAG = "Play Audio Service: ";
@@ -86,8 +92,16 @@ public class PlayAudioService extends Service {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                //mTextView.setText("That didn't work!");
                 Log.d(TAG, "Probably, audio not found");
+                try {
+                    Uri myUri = Uri.parse("https://ssl.gstatic.com/dictionary/static/sounds/de/0/" + word + ".mp3");
+                    mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+                    mediaPlayer.setDataSource(getApplicationContext(), myUri);
+                    mediaPlayer.prepare();
+                    mediaPlayer.start();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         }){
             @Override

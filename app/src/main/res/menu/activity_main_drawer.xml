@@ -4,15 +4,24 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_my_dict"
-            android:icon="@mipmap/ic_import_contacts_black_24dp"
+            android:icon="@mipmap/ic_collections_bookmark_black_24dp"
             android:title="My Dictionaries" />
         <item
             android:id="@+id/nav_learn_words"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@mipmap/ic_spellcheck_black_24dp"
             android:title="Learn Words" />
         <item
             android:id="@+id/nav_gram_book"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@mipmap/ic_import_contacts_black_24dp"
             android:title="Reading" />
+
+        <item android:title="Settings">
+            <menu>
+                <item
+                    android:id="@+id/nav_log_out"
+                    android:icon="@mipmap/ic_exit_to_app_black_24dp"
+                    android:title="Log Out" />
+            </menu>
+        </item>
     </group>
 </menu>

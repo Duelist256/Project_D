@@ -2,6 +2,7 @@ package com.dualism.proj1;
 
 import android.content.Intent;
 
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
@@ -12,16 +13,24 @@ import android.support.design.widget.NavigationView;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 import com.android.volley.RequestQueue;
 
 import com.android.volley.toolbox.Volley;
 
+import com.dualism.proj1.DB.DBHelper;
+import com.dualism.proj1.DB.Word;
+import com.dualism.proj1.Fragments.ExitDialogFragment;
 import com.dualism.proj1.Fragments.LearnWordsFragment;
 import com.dualism.proj1.Fragments.Menu3;
 import com.dualism.proj1.Fragments.MyDictionaryFragment;
+
+import java.util.List;
 
 /***  Create sample data
  *
@@ -54,7 +63,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     RequestQueue queue;
 
     private Bundle mBundle;
+    private TextView usernameTextView;
 
+    private DialogFragment mDialogFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +73,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -72,15 +84,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        View header = navigationView.getHeaderView(0);
+
+        usernameTextView = (TextView) header.findViewById(R.id.username_text_view);
+        usernameTextView.setText(getIntent().getStringExtra("username"));
+
         displaySelectedScreen(R.id.nav_learn_words);
 
         mBundle = new Bundle();
         String string = getIntent().getStringExtra("credentials");
         mBundle.putString("credentials", string);
 
+        mDialogFragment = new ExitDialogFragment();
+
         queue = Volley.newRequestQueue(this);
-
-
     }
 
     @Override
@@ -128,6 +145,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_gram_book:
                 fragment = new Menu3();
                 fragment.setArguments(mBundle);
+                break;
+            case R.id.nav_log_out:
+                mDialogFragment.setArguments(mBundle);
+                mDialogFragment.show(getSupportFragmentManager(), "dlg1");
                 break;
         }
 

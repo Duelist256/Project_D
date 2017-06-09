@@ -56,8 +56,10 @@ public class Login_Activity extends AppCompatActivity {
         queue = Volley.newRequestQueue(this);
     }
 
+
     public void sendCredentials() {
         Intent intent = new Intent(this, MainActivity.class);
+        intent.putExtra("username", etUsername.getText().toString());
         intent.putExtra("credentials", credentials);
         intent.putExtra("Ok", okValue.substring(4));
         startActivity(intent);

@@ -18,13 +18,17 @@ import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
+import com.dualism.proj1.DB.DBHelper;
+import com.dualism.proj1.DB.Word;
 import com.dualism.proj1.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -35,7 +39,7 @@ public class MyDictionaryFragment extends Fragment {
     private Button mButton;
     RequestQueue queue;
     String base64Credentials;
-
+    Word word1;
     public MyDictionaryFragment() {
 
     }
@@ -47,12 +51,17 @@ public class MyDictionaryFragment extends Fragment {
         // Inflate the layout for this fragment
         return view;
     }
-
+    private DBHelper databaseHelper;
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         getActivity().setTitle("My Dictionary");
 
+        databaseHelper = DBHelper.getInstance(getActivity());
+        databaseHelper.deleteAllWords();
+
+
+        final List<Word> words = new ArrayList<Word>();
         Intent intent = getActivity().getIntent();
         base64Credentials = intent.getStringExtra("credentials");
 
@@ -64,21 +73,34 @@ public class MyDictionaryFragment extends Fragment {
             public void onClick(View v) {
                 final String TAG = "Lol";
 
+                Log.d(TAG, "Starting the request");
                 String url = "http://54.218.48.30:8080/words";
 
 
                 JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(url, new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.d(TAG, "Eeee");
+                        Log.d(TAG, "Response!");
 
                         try {
                             for (int i = 0; i < response.length(); i++) {
                                 JSONObject jsonWord = (JSONObject) response.get(i);
                                 String word = jsonWord.getString("word");
                                 String translation = jsonWord.getString("value");
-                                Log.d(TAG, word + " - " + translation);
+
+                                word1 = new Word();
+                                word1.setWord(word);
+                                word1.setTranslation(translation);
+                                words.add(word1);
+
+                                //databaseHelper.addWord(word1);
+                                //Log.d(TAG, i + ". " + word + " - " + translation);
+                                if (i == 51380) {
+                                    Log.d(TAG, "all words added to ArrayList");
+                                }
                             }
+                            databaseHelper.addWords(words);
+                            Log.d("DB", "words were added");
                         } catch (JSONException e) {
                             e.printStackTrace();
                             Toast.makeText(getActivity().getApplicationContext(),
@@ -98,8 +120,6 @@ public class MyDictionaryFragment extends Fragment {
                     public Map<String, String> getHeaders() throws AuthFailureError {
                         Map<String, String>  headers = new HashMap<String, String>();
                         headers.put("Content-Type", "application/json; charset=utf-8");
-                /*Intent intent = getIntent();
-                base64Credentials = intent.getStringExtra("credentials");*/
                         headers.put("Authorization", "Basic "+base64Credentials);
                         return headers;
                     }
