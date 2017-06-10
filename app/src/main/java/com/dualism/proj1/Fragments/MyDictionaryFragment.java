@@ -9,11 +9,14 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -56,8 +59,8 @@ public class MyDictionaryFragment extends Fragment {
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
 
-    private String[] myDataSet = {"elem1", "elem2", "elem3", "elem4", "elem5", "elem6",
-            "elem7", "elem8", "elem9", "elem10", "elem11", "elem12"};
+    private EditText searchEditText;
+    
     private String[] myDSet1 = {"word1", "word2", "word3", "word4", "word5", "word6",
             "word7", "word8", "word9", "word10", "word11", "word12"};
     private String[] myDSet2 = {"translation1", "translation2", "translation3", "translation4", "translation5", "translation6",
@@ -97,11 +100,9 @@ public class MyDictionaryFragment extends Fragment {
             newWord.setWord(myDataSet2.get(i));
         }
 
-        //getWords();
+        searchEditText = (EditText) view.findViewById(R.id.my_dict_edit_text);
         databaseHelper = DBHelper.getInstance(getActivity());
-        //databaseHelper.renameTable("words");
 
-        //databaseHelper.deleteAllWords();
         int count = databaseHelper.countWords();
 
 
@@ -110,20 +111,8 @@ public class MyDictionaryFragment extends Fragment {
 
         queue = Volley.newRequestQueue(getActivity());
 
-        mButton = (Button) view.findViewById(R.id.get_words);
-        mButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                progress = ProgressDialog.show(getActivity(), "", "Loading words...", true);
-                getWords();
-            }
-        });
-
-        //mButton.setText("kek " + count);
-
         mRecyclerView = (RecyclerView) view.findViewById(R.id.wordss_recycler_view);
         mRecyclerView.setHasFixedSize(true);
-        //mRecyclerView.addItemDecoration(new SimpleDividerItemDecoration(getActivity()));
 
         mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
@@ -137,19 +126,47 @@ public class MyDictionaryFragment extends Fragment {
         } else {
             progress = ProgressDialog.show(getActivity(), "", "Loading words...", true);
             mWords = databaseHelper.getAllWords();
-            /*myDataSet1.clear();
-            myDataSet2.clear();
-            for (int i = 0; i < databaseHelper.countWords(); i++) {
-                myDataSet1.add(mWords.get(i).getWord());
-                myDataSet2.add(mWords.get(i).getTranslation());
-                Log.d("Omg", "word - " + i);
-            }*/
             mAdapter = new WordsAdapter(mWords);
             mRecyclerView.setAdapter(mAdapter);
             progress.dismiss();
         }
+
+        addTextListener();
     }
 
+    public void addTextListener(){
+
+        searchEditText.addTextChangedListener(new TextWatcher() {
+
+            public void afterTextChanged(Editable s) {}
+
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            public void onTextChanged(CharSequence query, int start, int before, int count) {
+
+                query = query.toString().toLowerCase();
+
+                final List<Word> filteredWordList = new ArrayList<>();
+
+                for (int i = 0; i < mWords.size(); i++) {
+
+                    final String text = mWords.get(i).getWord().toLowerCase();
+                    if (text.contains(query)) {
+                        Word newWord = new Word();
+                        newWord.setWord(mWords.get(i).getWord());
+                        newWord.setTranslation(mWords.get(i).getTranslation());
+                        filteredWordList.add(newWord);
+
+                    }
+                }
+
+                mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+                mAdapter = new WordsAdapter(filteredWordList);
+                mRecyclerView.setAdapter(mAdapter);
+                mAdapter.notifyDataSetChanged();  // data set changed
+            }
+        });
+    }
 
 
     private void getWords() {
@@ -167,7 +184,7 @@ public class MyDictionaryFragment extends Fragment {
             @Override
             public void onResponse(JSONArray response) {
                 Log.d(TAG, "Response!");
-                //myDataSet1.
+
                 try {
                     for (int i = 0; i < response.length(); i++) {
                         JSONObject jsonWord = (JSONObject) response.get(i);
@@ -182,8 +199,6 @@ public class MyDictionaryFragment extends Fragment {
                         word1.setTranslation(translation);
                         words.add(word1);
 
-                        //databaseHelper.addWord(word1);
-                        //Log.d(TAG, i + ". " + word + " - " + translation);
                         if (i == 51380) {
                             Log.d(TAG, "all words added to ArrayList");
                         }
@@ -218,6 +233,5 @@ public class MyDictionaryFragment extends Fragment {
             }
         };;
         queue.add(jsonArrayRequest);
-//        progress.dismiss();
     }
 }

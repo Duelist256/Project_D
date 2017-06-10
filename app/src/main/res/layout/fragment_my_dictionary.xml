@@ -4,12 +4,13 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical">
-    <Button
-        android:id="@+id/get_words"
-        android:layout_width="wrap_content"
+
+    <EditText
+        android:id="@+id/my_dict_edit_text"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Refresh"
-        android:onClick="getWords"/>
+        android:layout_marginLeft="10dp"
+        android:hint="Search"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/wordss_recycler_view"
