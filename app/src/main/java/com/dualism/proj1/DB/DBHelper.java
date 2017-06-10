@@ -21,7 +21,7 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 1;
 
     // Table Words
-    private static final String TABLE_WORDS = "posts";
+    private static final String TABLE_WORDS = "words";
 
     // Words Table Columns
     private static final String KEY_WORDS_ID = "id";
@@ -170,6 +170,30 @@ public class DBHelper extends SQLiteOpenHelper {
             }
         }
         return words;
+    }
+
+    public void renameTable (String newTableName) {
+        String sql = "ALTER TABLE " + "posts" + " RENAME TO " + newTableName + ";";
+        SQLiteDatabase db = getWritableDatabase();
+        db.rawQuery(sql, null);
+    }
+
+    public int countWords() {
+        int wordCount = 0;
+
+        // sql statement
+        String sql = "SELECT COUNT(*) FROM " + TABLE_WORDS;
+
+        Cursor cursor = getReadableDatabase().rawQuery(sql, null);
+
+        if (cursor.getCount() > 0) {
+            cursor.moveToFirst();
+            wordCount = cursor.getInt(0);
+        }
+
+        cursor.close();
+
+        return wordCount;
     }
 
     // Update example

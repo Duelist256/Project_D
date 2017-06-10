@@ -13,7 +13,6 @@ import android.support.design.widget.NavigationView;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -23,14 +22,10 @@ import com.android.volley.RequestQueue;
 
 import com.android.volley.toolbox.Volley;
 
-import com.dualism.proj1.DB.DBHelper;
-import com.dualism.proj1.DB.Word;
 import com.dualism.proj1.Fragments.ExitDialogFragment;
 import com.dualism.proj1.Fragments.LearnWordsFragment;
-import com.dualism.proj1.Fragments.Menu3;
+import com.dualism.proj1.Fragments.TextsFragment;
 import com.dualism.proj1.Fragments.MyDictionaryFragment;
-
-import java.util.List;
 
 /***  Create sample data
  *
@@ -143,7 +138,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 fragment = new LearnWordsFragment();
                 break;
             case R.id.nav_gram_book:
-                fragment = new Menu3();
+                fragment = new TextsFragment();
                 fragment.setArguments(mBundle);
                 break;
             case R.id.nav_log_out:

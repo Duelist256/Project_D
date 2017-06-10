@@ -5,22 +5,22 @@
         <item
             android:id="@+id/nav_my_dict"
             android:icon="@mipmap/ic_collections_bookmark_black_24dp"
-            android:title="My Dictionaries" />
+            android:title="@string/my_dictionary" />
         <item
             android:id="@+id/nav_learn_words"
             android:icon="@mipmap/ic_spellcheck_black_24dp"
-            android:title="Learn Words" />
+            android:title="@string/learn_words" />
         <item
             android:id="@+id/nav_gram_book"
             android:icon="@mipmap/ic_import_contacts_black_24dp"
-            android:title="Reading" />
+            android:title="@string/reading" />
 
-        <item android:title="Settings">
+        <item android:title="@string/settings">
             <menu>
                 <item
                     android:id="@+id/nav_log_out"
                     android:icon="@mipmap/ic_exit_to_app_black_24dp"
-                    android:title="Log Out" />
+                    android:title="@string/log_out" />
             </menu>
         </item>
     </group>

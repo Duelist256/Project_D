@@ -93,7 +93,7 @@ public class PlayAudioService extends Service {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.d(TAG, "Probably, audio not found");
-                try {
+                /*try {
                     Uri myUri = Uri.parse("https://ssl.gstatic.com/dictionary/static/sounds/de/0/" + word + ".mp3");
                     mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
                     mediaPlayer.setDataSource(getApplicationContext(), myUri);
@@ -101,15 +101,13 @@ public class PlayAudioService extends Service {
                     mediaPlayer.start();
                 } catch (IOException e) {
                     e.printStackTrace();
-                }
+                }*/
             }
         }){
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String>  headers = new HashMap<String, String>();
                 headers.put("Content-Type", "application/json; charset=utf-8");
-                /*Intent intent = getIntent();
-                base64Credentials = intent.getStringExtra("credentials");*/
                 headers.put("Authorization", "Basic "+base64Credentials);
                 return headers;
             }

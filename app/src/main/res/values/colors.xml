@@ -5,4 +5,7 @@
     <color name="colorAccent">#FF4081</color>
     <color name="trueAnswer">#05e905</color>
     <color name="falseAnswer">#ff0b23</color>
+
+    <color name="color_white">#ffffff</color>
+    <color name="grey_ask">#c4c3c3</color>
 </resources>
