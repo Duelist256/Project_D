@@ -7,12 +7,15 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -60,7 +63,7 @@ public class MyDictionaryFragment extends Fragment {
     private RecyclerView.LayoutManager mLayoutManager;
 
     private EditText searchEditText;
-    
+
     private String[] myDSet1 = {"word1", "word2", "word3", "word4", "word5", "word6",
             "word7", "word8", "word9", "word10", "word11", "word12"};
     private String[] myDSet2 = {"translation1", "translation2", "translation3", "translation4", "translation5", "translation6",
@@ -78,6 +81,12 @@ public class MyDictionaryFragment extends Fragment {
     }
 
     @Override
+    public void onCreate(Bundle savedInstanceState) {
+        setHasOptionsMenu(true);
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_my_dictionary, container, false);
@@ -89,6 +98,8 @@ public class MyDictionaryFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         getActivity().setTitle("My Dictionary");
+
+        //((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayOptions();
 
         myDataSet1 = new ArrayList<>(Arrays.asList(myDSet1));
         myDataSet2 = new ArrayList<>(Arrays.asList(myDSet2));
@@ -168,6 +179,11 @@ public class MyDictionaryFragment extends Fragment {
         });
     }
 
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.my_dictionary, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
 
     private void getWords() {
 

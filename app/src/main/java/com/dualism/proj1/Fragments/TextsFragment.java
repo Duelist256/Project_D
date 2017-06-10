@@ -54,7 +54,7 @@ public class TextsFragment extends Fragment {
         mAdapter = new TextsAdapter(myDataSet);
         mRecyclerView.setAdapter(mAdapter);
 
-        mButton = (Button) getActivity().findViewById(R.id.play);
+        mButton = (Button) getActivity().findViewById(R.id.showTexts);
 
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override

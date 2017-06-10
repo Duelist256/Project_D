@@ -1,6 +1,7 @@
 package com.dualism.proj1;
 
 import android.content.Intent;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.dualism.proj1.Fragments.ResultDialogFragment;
 import com.dualism.proj1.Services.PlayAudioService;
 
 import java.util.Arrays;
@@ -24,7 +26,7 @@ public class WordTranslationActivity extends AppCompatActivity {
     private Button nextBtn;
 
     private Intent intent1;
-
+    private DialogFragment mDialogFragment;
     private boolean isTrue;
 
     private WordTranslation[] TranslTest = new WordTranslation[] {
@@ -34,12 +36,31 @@ public class WordTranslationActivity extends AppCompatActivity {
             new WordTranslation("bird", "птица"),
     };
 
+    private int wordsCount;
+    private int correctAnswers;
+    private int answered;
+
 
     private int CurrentIndex;
 
     private void updateQuestion() {
+        answered++;
+
+        if (answered == wordsCount) {
+
+            Bundle bundle = new Bundle();
+            bundle.putInt("total", wordsCount);
+            bundle.putInt("correct", correctAnswers);
+
+            mDialogFragment.setArguments(bundle);
+            mDialogFragment.show(getSupportFragmentManager(), "dlg1");
+        }
+
         String question = TranslTest[CurrentIndex].getWord();
         tvWord.setText(question);
+
+
+
 
         String[] translations = new String[4];
         for (int i = 0; i < translations.length; i++) {
@@ -81,6 +102,7 @@ public class WordTranslationActivity extends AppCompatActivity {
             if(tvWord.getText().toString().equals(TranslTest[i].getWord())) {
                 if (answer.equals(TranslTest[i].getTranslation())) {
                     messageResId = R.string.correct_toast;
+                    correctAnswers++;
                     isTrue = true;
                     break;
                 }
@@ -108,6 +130,13 @@ public class WordTranslationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_word_translation);
+
+        mDialogFragment = new ResultDialogFragment();
+
+        wordsCount = TranslTest.length;
+        correctAnswers = 0;
+        answered = -1;
+
         //String[] appCategoryDetail = mDatabaseHandler.getAppCategoryDetail();
         getSupportActionBar().setTitle("Word-Translation");
 

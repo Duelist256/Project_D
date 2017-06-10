@@ -7,7 +7,7 @@
     <!-- TODO: Update blank fragment layout -->
 
     <Button
-        android:id="@+id/play"
+        android:id="@+id/showTexts"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Play"
@@ -24,7 +24,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        android:layout_below="@+id/play"
+        android:layout_below="@+id/showTexts"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"/>
 

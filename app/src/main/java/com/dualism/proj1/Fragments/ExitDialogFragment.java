@@ -41,7 +41,7 @@ import java.util.Map;
  */
 
 public class ExitDialogFragment extends DialogFragment implements DialogInterface.OnClickListener {
-    final String LOG_TAG = "DialogFragment";
+    final String LOG_TAG = "ExitDialogFragment";
 
     private String credentials;
     private RequestQueue queue;
@@ -126,8 +126,6 @@ public class ExitDialogFragment extends DialogFragment implements DialogInterfac
                     public Map<String, String> getHeaders() throws AuthFailureError {
                         Map<String, String>  headers = new HashMap<String, String>();
                         headers.put("Content-Type", "application/json; charset=utf-8");
-                /*Intent intent = getIntent();
-                base64Credentials = intent.getStringExtra("credentials");*/
                         headers.put("Authorization", "Basic "+credentials);
                         return headers;
                     }
