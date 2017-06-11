@@ -27,32 +27,6 @@ import com.dualism.proj1.Fragments.LearnWordsFragment;
 import com.dualism.proj1.Fragments.TextsFragment;
 import com.dualism.proj1.Fragments.MyDictionaryFragment;
 
-/***  Create sample data
- *
- *  Word sampleWord = new Word();
- *  sampleWord.setWord("dog");
- *  sampleWord.setTranslation("собака");
- *
- *  Word sampleWord1 = new Word();
- *  sampleWord1.setWord("cat");
- *  sampleWord1.setTranslation("кошка");
- *
- *  //Get singleton instance of database
- *  DBHelper databaseHelper = DBHelper.getInstance(this);
- *
- *  databaseHelper.deleteAllWords();
- *  // Add sample post to the database
- *  databaseHelper.addWord(sampleWord);
- *  databaseHelper.addWord(sampleWord1);
- *
- *  // Get all posts from database
- *  List<Word> words = databaseHelper.getAllWords();
-
- *  for (Word word : words) {
- *      Log.d("DB", word.getWord() + " - " + word.getTranslation());
- *  }
- ***/
-
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
     RequestQueue queue;
@@ -168,5 +142,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         displaySelectedScreen(id);
 
         return true;
+    }
+
+    public void switchContent(int id, Fragment fragment) {
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(id, fragment, fragment.toString());
+        ft.addToBackStack(null);
+        ft.commit();
     }
 }

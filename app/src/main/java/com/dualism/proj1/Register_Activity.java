@@ -36,12 +36,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Register_Activity extends AppCompatActivity {
-    //Button bRegister;
     private EditText etName, etEmail, etPassword;
     private JSONObject okResponse;
     private String okResp;
 
-    private boolean isResponsesEqual = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,14 +51,12 @@ public class Register_Activity extends AppCompatActivity {
     }
 
     public void register(View view) {
-        //showProgressDialog();
 
         final String TAG = "Lol";
         RequestQueue queue = Volley.newRequestQueue(this);
 
         String url = "http://54.218.48.30:8080/saveuser";
 
-        //postParam.put("id", "228");
         if(validateEmail(etEmail.getText().toString()) == true) {
             final Map<String, String> postParam= new HashMap<String, String>();
             postParam.put("email", etEmail.getText().toString());

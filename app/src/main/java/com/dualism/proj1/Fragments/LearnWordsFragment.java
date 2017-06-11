@@ -7,6 +7,9 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.LinearInterpolator;
 import android.widget.Button;
 
 import com.dualism.proj1.AuditionActivity;
@@ -35,6 +38,7 @@ public class LearnWordsFragment extends Fragment {
         //textView.setText("ekea"); // mowno delat tak, mowet bb|t dawe nuwno!!11
 
         wordTranslationButton = (Button) getView().findViewById(R.id.word_translation_button);
+        wordTranslationButton.setBackgroundResource(android.R.drawable.btn_default);
         wordTranslationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -45,6 +49,7 @@ public class LearnWordsFragment extends Fragment {
         });
 
         translationWordButton = (Button) getView().findViewById(R.id.translation_word_button);
+        translationWordButton.setBackgroundResource(android.R.drawable.btn_default);
         translationWordButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -54,10 +59,20 @@ public class LearnWordsFragment extends Fragment {
             }
         });
 
+        final Animation animation = new AlphaAnimation(1, 0); // Change alpha from fully visible to invisible
+        animation.setDuration(500); // duration - half a second
+        animation.setInterpolator(new LinearInterpolator()); // do not alter animation rate
+        animation.setRepeatCount(Animation.INFINITE); // Repeat animation infinitely
+        animation.setRepeatMode(Animation.REVERSE); // Reverse animation at the end so the button will fade back in
+
+
         auditonButton = (Button) getView().findViewById(R.id.audio_word_button);
+        auditonButton.startAnimation(animation);
+        auditonButton.setBackgroundResource(android.R.drawable.btn_default);
         auditonButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                v.clearAnimation();
                 Intent intent = new Intent(getActivity(), AuditionActivity.class);
                 intent.putExtra("credentials", getActivity().getIntent().getStringExtra("credentials"));
                 startActivity(intent);
@@ -65,6 +80,7 @@ public class LearnWordsFragment extends Fragment {
         });
 
         speakingButton = (Button) getView().findViewById(R.id.speaking_button);
+        speakingButton.setBackgroundResource(android.R.drawable.btn_default);
         speakingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

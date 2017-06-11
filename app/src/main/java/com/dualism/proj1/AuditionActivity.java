@@ -39,6 +39,7 @@ public class AuditionActivity extends AppCompatActivity {
         intent = getIntent();
 
         repeatButton = (Button) findViewById(R.id.audition_repeat_button);
+        repeatButton.setBackgroundResource(android.R.drawable.btn_default);
         repeatButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -49,6 +50,7 @@ public class AuditionActivity extends AppCompatActivity {
         });
 
         checkButton = (Button) findViewById(R.id.audition_check_button);
+        checkButton.setBackgroundResource(android.R.drawable.btn_default);
         checkButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -68,6 +70,7 @@ public class AuditionActivity extends AppCompatActivity {
         });
 
         nextButton = (Button) findViewById(R.id.audition_next_button);
+        nextButton.setBackgroundResource(android.R.drawable.btn_default);
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

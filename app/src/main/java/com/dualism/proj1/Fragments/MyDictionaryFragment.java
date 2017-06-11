@@ -35,7 +35,7 @@ import com.dualism.proj1.DB.DBHelper;
 import com.dualism.proj1.DB.Word;
 import com.dualism.proj1.MainActivity;
 import com.dualism.proj1.R;
-import com.dualism.proj1.SimpleDividerItemDecoration;
+
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -53,10 +53,10 @@ import java.util.concurrent.TimeUnit;
  */
 
 public class MyDictionaryFragment extends Fragment {
-    private Button mButton;
-    RequestQueue queue;
-    String base64Credentials;
-    Word word1;
+
+    private RequestQueue queue;
+    private String base64Credentials;
+    private Word word1;
 
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
@@ -76,6 +76,8 @@ public class MyDictionaryFragment extends Fragment {
 
     private ProgressDialog progress;
 
+    private DBHelper databaseHelper;
+
     public MyDictionaryFragment() {
 
     }
@@ -93,13 +95,11 @@ public class MyDictionaryFragment extends Fragment {
         // Inflate the layout for this fragment
         return view;
     }
-    private DBHelper databaseHelper;
+
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         getActivity().setTitle("My Dictionary");
-
-        //((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayOptions();
 
         myDataSet1 = new ArrayList<>(Arrays.asList(myDSet1));
         myDataSet2 = new ArrayList<>(Arrays.asList(myDSet2));
@@ -187,7 +187,7 @@ public class MyDictionaryFragment extends Fragment {
 
     private void getWords() {
 
-        final String TAG = "Lol";
+        final String TAG = "MyDictionary";
         final List<Word> words = new ArrayList<Word>();
         myDataSet1.clear();
         myDataSet2.clear();

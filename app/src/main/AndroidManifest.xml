@@ -25,7 +25,6 @@
             android:name=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
-        <activity android:name=".LearnWordsActivity"/>
         <activity android:name=".WordTranslationActivity"/>
         <activity android:name=".Register_Activity"/>
         <activity android:name=".TranslationWordActivity">

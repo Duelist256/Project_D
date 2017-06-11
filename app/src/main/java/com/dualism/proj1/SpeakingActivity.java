@@ -56,6 +56,7 @@ public class SpeakingActivity extends AppCompatActivity {
 
 
         sayButton = (Button) findViewById(R.id.speaking_say_button);
+        sayButton.setBackgroundResource(android.R.drawable.btn_default);
         sayButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -72,6 +73,7 @@ public class SpeakingActivity extends AppCompatActivity {
         });
 
         nextButton = (Button) findViewById(R.id.speaking_next_button);
+        nextButton.setBackgroundResource(android.R.drawable.btn_default);
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
